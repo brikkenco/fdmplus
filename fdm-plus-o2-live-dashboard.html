@@ -245,8 +245,10 @@
   table{width:100%;border-collapse:collapse;font-size:var(--body-s)}
   thead th{
     text-align:left;font-size:var(--body-compact);font-weight:500;letter-spacing:0;text-transform:none;
-    color:#4F0702;padding:16px 20px;background:var(--bg);border-bottom:1px solid var(--border);white-space:nowrap;
+    color:#4F0702;padding:16px 20px;background:var(--bg);border-bottom:none;white-space:nowrap;
   }
+  thead th:first-child{border-radius:6px 0 0 6px}
+  thead th:last-child{border-radius:0 6px 6px 0}
   thead th.num{text-align:left}
   tbody td{padding:20px;border-bottom:1px solid var(--border);vertical-align:middle;font-weight:500}
   tbody td b{font-weight:600}
@@ -476,11 +478,13 @@
       <nav class="main" aria-label="Primary">
         <a href="#pulse">Live pulse</a>
         <a href="#position">O2 position</a>
-        <a href="#signals">Signals</a>
+        <a href="#drivers">Handsets</a>
+        <a href="#networks">Networks</a>
         <a href="#retailers">Retailers</a>
         <a href="#promotions">Promotions</a>
         <a href="#pricing">Pricing</a>
-        <a href="#review">Review</a>
+        <a href="#newsletter">Newsletters</a>
+        <a href="#signals">Signals</a>
       </nav>
       <button class="btn-ask-top">Log out</button>
     </div>
@@ -807,12 +811,6 @@
     <p>O2's current visibility is uneven by channel. The strongest positions are in specialist and direct channels, while comparison and affiliate environments look weaker.</p>
   </div>
 
-  <div class="insight" style="margin-bottom:22px">
-    <span class="k">Hero insight</span>
-    <strong style="font-size:16px;display:block;margin-bottom:8px">O2 is strongest in specialist and direct channels, but is absent or weak in four key environments.</strong>
-    O2 performs particularly well in MobilePhonesDirect, Buymobiles, Samsung and Affordable Mobiles. Fonehouse and Carphone Warehouse show no O2 presence in the current captured ranking data — these are confirmed distribution gaps. Money Saving Expert shows very low O2 visibility, with O2 absent from the current value-led comparison cut. MoneySuperMarket shows weak listing share with only isolated #1 visibility, indicating O2 lacks broad presence in that channel.
-  </div>
-
   <div class="table-wrap">
     <div class="table-scroll">
       <table>
@@ -842,7 +840,27 @@
 
 
 
-  <div class="btn-row">
+  <div class="insight" style="margin-top:22px;margin-bottom:22px;background:var(--rose);border-color:var(--blush)">
+    <span class="k" style="color:var(--primary)">FDM+ Analysis</span>
+    <p style="margin-top:6px">O2's channel position is uneven. It is strongest in specialist and direct channels, particularly MobilePhonesDirect, Buymobiles, Samsung and Affordable Mobiles. In the current captured view, O2 appears in 7 of 9 tracked retailers, giving it 77.8% retailer coverage.</p>
+    <p style="margin-top:10px">The main areas requiring validation are Fonehouse and Carphone Warehouse, where O2 shows no captured ranking rows in the selected view. O2 is also weak in parts of the comparison and affiliate environment, including Money Saving Expert and MoneySuperMarket.</p>
+  </div>
+
+  <div class="grid cols-2" style="align-items:start">
+    <div class="insight note" style="border-color:var(--blush)">
+      <span class="k" style="color:var(--primary)">Interpretation</span>
+      <p style="margin-top:6px">O2's channel story is not a simple coverage story. The issue is not that O2 is absent from the market overall. The issue is that O2's visibility is concentrated in stronger specialist and direct channels, while some value-led comparison environments appear weak or absent.</p>
+      <p style="margin-top:10px">That creates two different types of action: defend the channels where O2 is already performing well, and validate whether the weak or absent channels represent true distribution gaps, range decisions or source coverage limitations.</p>
+    </div>
+    <div class="insight note" style="border-color:var(--blush)">
+      <span class="k" style="color:var(--primary)">Recommended action</span>
+      <p style="margin-top:6px">Split the retailer view into three action groups:</p>
+      <p style="margin-top:8px"><strong>Defend:</strong> MobilePhonesDirect, Buymobiles, Samsung and Affordable Mobiles.<br><strong>Improve:</strong> Uswitch, MoneySuperMarket and Money Saving Expert.<br><strong>Validate:</strong> Fonehouse and Carphone Warehouse.</p>
+      <p style="margin-top:10px">For weak or absent channels, do not treat zero visibility as confirmed non-distribution without analyst validation. The next step is to check source coverage, device mix and competitor presence before deciding whether this is a commercial gap or a data capture outcome.</p>
+    </div>
+  </div>
+
+  <div class="btn-row" style="margin-top:22px">
     <button class="btn">Show strong channels</button>
     <button class="btn">Validate gaps</button>
     <button class="btn" onclick="document.getElementById('newsletter').scrollIntoView()">Open affiliate visibility</button>
@@ -863,21 +881,6 @@
     <p>Promotion activity can support visibility, but it should not automatically be treated as the cause of ranking performance.</p>
   </div>
 
-  <div class="grid cols-2" style="align-items:start;margin-bottom:28px">
-    <div class="insight">
-      <span class="k">Main insight</span>
-      <strong style="font-size:16px;display:block;margin-bottom:8px">O2's latest ranked visibility is heavily promotion-supported.</strong>
-      Using the current promotion classification, 92.5% of O2's latest-snapshot listings contain promotion detail, extra-data promotion or promoted-deal tagging.
-    </div>
-    <div class="insight note">
-      <span class="k">Movement</span>
-      <strong style="display:block;margin-bottom:6px">Promotion-supported listings increased from 86.8% to 92.5% between the previous and latest ranking captures. Movement: +5.7pp</strong>
-      O2's latest visibility is more promotion-supported than the previous capture. Analysts should review whether O2's strongest positions remain resilient after promotional mechanics change or expire.
-    </div>
-  </div>
-
-  <div class="ps-label" style="margin-bottom:12px">Promotion breakdown</div>
-  <p style="color:var(--muted);margin-bottom:16px;font-size:var(--body-compact)">These categories are non-exclusive. A single listing may include more than one promotion mechanic.</p>
   <div class="table-wrap" style="margin-bottom:28px">
     <div class="table-scroll">
       <table>
@@ -900,6 +903,7 @@
     </div>
   </div>
 
+  <div style="display:none">
   <div class="insight" style="margin-bottom:22px">
     <span class="k">Supporting context</span>
     The promotion feed shows active movement across Apple, Samsung, Google and SIMO offers. O2 refreshed Apple promotions, including iPhone 17 Pro Max 256GB activity. Tesco refreshed Clubcard-led promotions, and Sky launched an "Unltd for £20" SIMO promotion.
@@ -921,21 +925,26 @@
       </table>
     </div>
   </div>
+  </div><!-- end hidden supporting context + evidence -->
 
-  <div class="grid cols-2" style="align-items:start;margin-bottom:22px">
-    <div class="insight">
-      <span class="k">AI interpretation</span>
-      O2's recent ranking strength should be treated as promotion-supported until the evidence shows whether visibility remains strong after promotions change or expire.
-    </div>
-    <div class="insight note">
-      <span class="k">Analyst check</span>
-      Before this insight is marked customer-safe, classify promotion type, confirm source evidence and check whether rank movement is linked to price, promotion, retailer placement or availability.
-    </div>
+  <div class="insight" style="margin-bottom:22px;background:var(--rose);border-color:var(--blush)">
+    <span class="k" style="color:var(--primary)">FDM+ Analysis</span>
+    <p style="margin-top:6px">O2's latest ranked visibility is heavily promotion-supported. Using the current promotion classification, 92.5% of O2's captured listings include promotion detail, extra-data promotion or promoted-deal tagging.</p>
+    <p style="margin-top:10px">Promotion-supported visibility also increased from 86.8% to 92.5% versus the previous capture, a movement of +5.7pp. The promotion feed shows active movement across Apple, Samsung, Google and SIMO offers, including O2 refreshing Apple promotions on iPhone 17 Pro Max 256GB. The same evidence also shows multiple promotion mechanics in the market, including airtime savings, extra data, half-price periods, device discounts, cashback, gifts, Clubcard value and SIMO price promotions.</p>
   </div>
 
-  <div class="insight caveat" style="margin-bottom:22px">
-    <span class="k">Caveat</span>
-    Promotion presence does not prove promotion causality.
+  <div class="grid cols-2" style="align-items:start;margin-bottom:22px">
+    <div class="insight note" style="border-color:var(--blush)">
+      <span class="k" style="color:var(--primary)">Interpretation</span>
+      <p style="margin-top:6px">This does not mean promotions caused O2's ranking performance. It means a large proportion of O2's current visibility is attached to active offer mechanics.</p>
+      <p style="margin-top:10px">That creates a durability question. O2 may be ranking strongly, but the product needs to distinguish between durable visibility and promotion-supported visibility. If O2's strongest positions depend on short-term promotions, the risk is that visibility weakens when offers change, expire or are matched by competitors.</p>
+    </div>
+    <div class="insight note" style="border-color:var(--blush)">
+      <span class="k" style="color:var(--primary)">Recommended action</span>
+      <p style="margin-top:6px">Break promotion-supported visibility into promotion types and expiry risk. Prioritise three checks:</p>
+      <p style="margin-top:8px">Which O2 #1 positions are promotion-supported?<br>Which promotions have an end date or recent change?<br>Which devices remain strong when promotion mechanics are removed or matched?</p>
+      <p style="margin-top:10px">The dashboard should flag any high-ranking O2 position where the evidence suggests the ranking may be dependent on promotion, retailer placement or bundled value rather than price leadership.</p>
+    </div>
   </div>
 
   <div class="btn-row">
@@ -951,22 +960,12 @@
 <section id="pricing" style="background:#fff;border-top:1px solid var(--border)">
   <div class="wrap">
   <div class="sec-head">
-    <span class="eyebrow">Price</span>
+    <span class="eyebrow">Pricing</span>
     <h2>Where is O2 exposed on value?</h2>
     <p>Price competitiveness should be assessed by device, storage, data allowance, contract length, upfront cost, monthly cost, total cost and promotion mechanic.</p>
   </div>
 
-  <div class="insight" style="margin-bottom:22px">
-    <span class="k">Main insight</span>
-    <strong style="font-size:16px;display:block;margin-bottom:8px">Flagship Apple remains the clearest price watch area.</strong>
-    Current pricing evidence shows Three as the most competitive provider on iPhone 17 Pro Max, despite price decreases from O2 and EE.
-  </div>
-
   <div class="ps-label" style="margin-bottom:6px">Price watch: iPhone 17 Pro Max 256GB</div>
-  <div class="insight note" style="margin-bottom:22px">
-    <span class="k">Interpretation</span>
-    The ranking-data view and pricing evidence both show why this device needs a watchlist. Three is the key benchmark in the flagship comparison, while captured ranking rows also show significant variation by retailer, data allowance and provider.
-  </div>
 
   <p style="font-size:var(--body-xs);color:var(--muted);margin-bottom:12px">This table is a captured market evidence view, not a fully matched price comparison. Providers differ by retailer, data allowance and contract term.</p>
   <div class="table-wrap" style="margin-bottom:22px">
@@ -998,14 +997,22 @@
     </div>
   </div>
 
+  <div class="insight" style="margin-bottom:22px;background:var(--rose);border-color:var(--blush)">
+    <span class="k" style="color:var(--primary)">FDM+ Analysis</span>
+    <p style="margin-top:6px">Flagship Apple remains the clearest value-exposure area for O2. Current pricing evidence shows Three as the most competitive provider on iPhone 17 Pro Max, despite price decreases from O2 and EE. O2 has refreshed Apple promotions, but Three remains the key benchmark on this device.</p>
+    <p style="margin-top:10px">The wider pricing evidence also shows that value competition is not limited to handsets. In SIMO, Sky launched an "Unltd for £20" promotion, while Tesco matched Sky's lead unlimited pricing in the 12-month+ SIMO comparison.</p>
+  </div>
+
   <div class="grid cols-2" style="align-items:start;margin-bottom:22px">
-    <div class="insight">
-      <span class="k">Analyst interpretation</span>
-      O2 is not the cheapest captured provider on iPhone 17 Pro Max 256GB. Three is cheaper on an unlimited 24-month comparison, while iD Mobile appears cheaper in a lower-data, non-like-for-like row. The product action is to run a matched comparison using the same device, storage, data allowance, tenure and upfront-cost band.
+    <div class="insight note" style="border-color:var(--blush)">
+      <span class="k" style="color:var(--primary)">Interpretation</span>
+      <p style="margin-top:6px">O2's ranking performance should not be confused with price leadership. O2 can rank well while still being exposed on price, especially when promotions, retailer placement, data allowance or bundle value are influencing visibility.</p>
+      <p style="margin-top:10px">The key value question is therefore: where is O2 ranking well despite not being cheapest, and what is supporting that position? For iPhone 17 Pro Max, O2 needs a like-for-like comparison against Three using matched storage, data allowance, tenure, upfront cost, monthly cost and total cost of ownership.</p>
     </div>
-    <div class="insight note">
-      <span class="k">Recommended action</span>
-      Keep iPhone 17 Pro Max on the live price watchlist. Compare O2 against Three using like-for-like storage, data allowance, contract length, upfront cost, MRC, TCO and promotion value.
+    <div class="insight note" style="border-color:var(--blush)">
+      <span class="k" style="color:var(--primary)">Recommended action</span>
+      <p style="margin-top:6px">Keep iPhone 17 Pro Max on the live price watchlist and add a matched comparison view for O2 versus Three. The comparison should include: device and storage, data allowance, contract length, upfront cost, monthly cost, total cost of ownership, promotion value, rank position and retailer.</p>
+      <p style="margin-top:10px">Avoid using generic average pricing as the main decision metric. Use matched comparisons for action, and use broader pricing views only as a directional market signal.</p>
     </div>
   </div>
 
@@ -1027,10 +1034,10 @@
     <p>Newsletter and affiliate visibility updates when new partner newsletters are received and processed.</p>
   </div>
 
-  <div class="insight" style="margin-bottom:22px">
-    <span class="k">Main insight</span>
-    <strong style="font-size:16px;display:block;margin-bottom:8px">O2 newsletter visibility is weak in the latest affiliate cuts.</strong>
-    O2 had 23% SOV across the broader MPD, Fonehouse, Buymobiles, MSE and MoneySuperMarket cut, with only three O2 plans featured via MPD and Buymobiles and a -39pp WoW movement. Across the MPD, Buymobiles and Affordable Mobiles cut, O2 had 30% SOV, again with only three O2 plans featured and a -50pp WoW movement.
+  <div class="insight" style="margin-bottom:22px;background:var(--rose);border-color:var(--blush)">
+    <span class="k" style="color:var(--primary)">FDM+ Analysis</span>
+    <p style="margin-top:6px">O2 is under-featured in affiliate and newsletter visibility compared with its stronger specialist/direct ranking performance. O2 has 23% SOV in the broader newsletter cut and 30% SOV in the MPD / Buymobiles / Affordable Mobiles cut, with only three O2 plans featured in each view.</p>
+    <p style="margin-top:10px">The broader cut shows O2 down 39pp WoW, while the narrower cut shows O2 down 50pp WoW. Source-level evidence shows O2 appearing in Buymobiles, but not in several other newsletter sources, including Fonehouse, MPD, Money Saving Expert and MoneySuperMarket.</p>
   </div>
 
   <div class="ps-label" style="margin-bottom:12px">Source-level evidence</div>
@@ -1059,13 +1066,15 @@
   </div>
 
   <div class="grid cols-2" style="align-items:start;margin-bottom:22px">
-    <div class="insight note">
-      <span class="k">Interpretation</span>
-      O2's newsletter visibility appears weaker than its ranking performance in selected specialist and direct channels. This suggests a channel visibility gap rather than an overall market weakness.
+    <div class="insight note" style="border-color:var(--blush)">
+      <span class="k" style="color:var(--primary)">Interpretation</span>
+      <p style="margin-top:6px">O2's affiliate visibility does not match its stronger ranking performance in selected specialist and direct environments. That suggests a potential gap in partner communications and newsletter exposure.</p>
+      <p style="margin-top:10px">This matters because affiliate and newsletter placements can influence consideration, especially for value-conscious customers comparing devices, SIMO plans or promotional offers. O2 may be winning visibility in some ranked environments while still being under-represented in the channels where customers are actively prompted with deals.</p>
     </div>
-    <div class="insight">
-      <span class="k">Recommended action</span>
-      Prioritise affiliate/newsletter visibility for high-value Apple and Samsung devices where O2 wants to defend ranking momentum.
+    <div class="insight note" style="border-color:var(--blush)">
+      <span class="k" style="color:var(--primary)">Recommended action</span>
+      <p style="margin-top:6px">Treat affiliate and newsletter visibility as a dedicated channel watchlist. Prioritise: increasing O2 presence in partner newsletters where it is currently absent; aligning newsletter features with O2's strongest device priorities, especially Apple and Samsung; and tracking whether featured-plan visibility improves after partner activity changes.</p>
+      <p style="margin-top:10px">Separate handset newsletter visibility from SIMO-led value visibility, because Money Saving Expert and MoneySuperMarket are currently more SIMO/value-led in the captured evidence. O2 should use the affiliate feed to identify missed visibility opportunities and decide which partners need stronger deal placement, stronger creative, or more competitive offer mechanics.</p>
     </div>
   </div>
 
