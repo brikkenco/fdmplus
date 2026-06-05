@@ -12,17 +12,17 @@
     --bg:#F2EEED;
     --surface:#FFFFFF;
     --surface-warm:#FFF3EE;
-    --primary:#FF6B4C;
+    --primary:#D03F1A;
     --deep:#4F0702;
-    --signal:#E8431A;
-    --coral:#FF6B4C;
+    --signal:#C02800;
+    --coral:#D03F1A;
     --blush:#FFE4DC;
     --rose:#FFF0EB;
     --text:#171717;
     --muted:#7A5C56;
     --border:#EAE0DB;
     --success:#1A6B45;
-    --warning:#CC7700;
+    --warning:#A85E00;
     --info:#7B00D4;
     --purple:#7B00D4;
     --radius:6px;
@@ -33,6 +33,11 @@
     --maxw:1320px;
     --sans:'Poppins', Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --num:'Oswald', 'Arial Narrow', sans-serif;
+
+    /* ---------- easing ---------- */
+    --ease-out:  cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 
     /* ---------- type scale · title ---------- */
     --title-1: 56px; --lh-title-1: 64px;
@@ -57,18 +62,18 @@
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth;scroll-padding-top:128px}
+  @media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+  html{scroll-padding-top:128px}
   body{
     font-family:var(--sans);
     background:var(--bg);
     color:var(--text);
-    line-height:1.2;
+    line-height:1.5;
     -webkit-font-smoothing:antialiased;
     text-rendering:optimizeLegibility;
     background-image:
-      radial-gradient(900px 480px at 88% -8%, rgba(255,107,76,.12), transparent 60%),
-      radial-gradient(720px 420px at -6% 4%, rgba(232,67,26,.06), transparent 55%);
-    background-attachment:fixed;
+      radial-gradient(900px 480px at 88% -8%, rgba(208,63,26,.1), transparent 60%),
+      radial-gradient(720px 420px at -6% 4%, rgba(192,40,0,.05), transparent 55%);
   }
 
   /* ---------- typographic primitives ---------- */
@@ -113,15 +118,17 @@
   nav.main::-webkit-scrollbar{display:none}
   nav.main a{
     font-size:var(--body-compact);line-height:var(--lh-body-compact);font-weight:600;color:var(--muted);text-decoration:none;
-    padding:8px 11px;border-radius:8px;white-space:nowrap;transition:.16s;
+    padding:8px 11px;border-radius:var(--radius);white-space:nowrap;
+    transition: color 160ms ease-out, background-color 160ms ease-out;
   }
-  nav.main a:hover{color:var(--text);background:var(--rose)}
+  @media(hover:hover) and (pointer:fine){nav.main a:hover{color:var(--text);background:var(--rose)}}
   .btn-ask-top{
-    font-size:var(--body-compact);font-weight:600;color:#99402E;background:#FFE1DB;
-    border:1.5px solid #FFCBC0;padding:9px 15px;border-radius:12px;cursor:pointer;white-space:nowrap;
-    transition:.16s;
+    font-size:var(--body-compact);font-weight:600;color:#7A2010;background:#FFE1DB;
+    border:1.5px solid #FFCBC0;padding:9px 15px;border-radius:var(--radius);cursor:pointer;white-space:nowrap;
+    transition: background-color 160ms ease-out;
   }
-  .btn-ask-top:hover{background:#FFCBC0}
+  @media(hover:hover) and (pointer:fine){.btn-ask-top:hover{background:#FFCBC0}}
+  .btn-ask-top:active{transform:scale(0.97)}
 
   /* ---------- customer banner ---------- */
   .cust-banner{
@@ -158,17 +165,17 @@
   /* ---------- generic card ---------- */
   .card{
     background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-    box-shadow:var(--shadow-sm);padding:22px;position:relative;transition:transform .18s, box-shadow .18s;
+    box-shadow:var(--shadow-sm);padding:22px;position:relative;
   }
-  .card:hover{box-shadow:var(--shadow-sm);transform:none}
-  .card .ctitle{font-size:var(--title-2);line-height:1.2;font-weight:500;margin:0;padding:12px 0 12px;letter-spacing:-.01em}
+  .card .ctitle{font-size:var(--title-5);line-height:var(--lh-title-5);font-weight:500;margin:0;padding:10px 0 10px;letter-spacing:-.01em}
   .card p{font-size:var(--body-s);line-height:var(--lh-body-s);color:#171717}
 
   /* buttons */
-  .btn{font-family:inherit;cursor:pointer;font-size:var(--body-compact);font-weight:500;border-radius:9px;padding:9px 14px;border:1px solid var(--border);background:#fff;color:var(--text);transition:.15s;white-space:nowrap}
-  .btn:hover{border-color:var(--coral);color:var(--primary);background:var(--rose)}
-  .btn.primary{background:var(--primary);color:#fff;border:2px solid #FFCBC0;border-radius:12px}
-  .btn.primary:hover{background:var(--deep);color:#fff}
+  .btn{font-family:inherit;cursor:pointer;font-size:var(--body-compact);font-weight:500;border-radius:var(--radius);padding:9px 14px;border:1px solid var(--border);background:#fff;color:var(--text);transition:color 150ms ease-out, background-color 150ms ease-out, border-color 150ms ease-out;white-space:nowrap}
+  @media(hover:hover) and (pointer:fine){.btn:hover{border-color:var(--coral);color:var(--primary);background:var(--rose)}}
+  .btn:active{transform:scale(0.97)}
+  .btn.primary{background:var(--primary);color:#fff;border:2px solid rgba(255,255,255,.25);border-radius:var(--radius)}
+  @media(hover:hover) and (pointer:fine){.btn.primary:hover{background:var(--deep);color:#fff}}
   .btn.ghost{background:transparent;border-color:transparent;color:var(--primary);padding-left:0;padding-right:0}
   .btn.ghost:hover{background:transparent;color:var(--signal);text-decoration:underline}
   .btn.sm{padding:7px 11px;font-size:var(--body-xs)}
@@ -176,9 +183,8 @@
 
   /* link-arrow */
   .link-arrow{display:inline-flex;align-items:center;gap:6px;font-size:var(--body-compact);font-weight:500;color:var(--primary);background:none;border:none;cursor:pointer;padding:0;font-family:inherit}
-  .link-arrow svg{transition:transform .16s}
-  .link-arrow:hover svg{transform:translateX(3px)}
-  .link-arrow:hover{color:var(--signal)}
+  .link-arrow svg{transition:transform 160ms ease-out}
+  @media(hover:hover) and (pointer:fine){.link-arrow:hover svg{transform:translateX(3px)}.link-arrow:hover{color:var(--signal)}}
 
   /* ---------- hero ---------- */
   .hero{padding-top:46px}
@@ -209,7 +215,7 @@
   .ev-num .t.down{color:var(--signal)}
   .ev-num .t.flat{color:var(--muted)}
   .ev-stat.momentum .ev-num .v{font-size:var(--display-sm)}
-  .ev-caveat{padding:14px 18px;background:var(--surface-warm);font-size:12px;color:var(--muted);line-height:1.5;display:flex;gap:9px;align-items:flex-start}
+  .ev-caveat{padding:14px 18px;background:var(--surface-warm);font-size:var(--body-xs);color:var(--muted);line-height:var(--lh-body-xs);display:flex;gap:9px;align-items:flex-start}
   .ev-caveat svg{flex:none;color:var(--signal);margin-top:1px}
 
   /* ---------- priority signal summary cards ---------- */
@@ -220,7 +226,7 @@
   .ps-value.txt{font-size:var(--title-4)}
   .ps-card .ctitle{font-size:var(--title-6);line-height:var(--lh-title-6)}
   .ps-small{font-size:11.5px;color:var(--muted);font-style:italic;margin-top:8px;padding-top:8px;border-top:1px dashed var(--border)}
-  .ps-caveat{font-size:12px;color:var(--signal);background:var(--rose);border-radius:8px;padding:8px 10px;margin-top:10px;line-height:1.45}
+  .ps-caveat{font-size:var(--body-xs);color:var(--signal);background:var(--rose);border-radius:var(--radius);padding:8px 10px;margin-top:10px;line-height:var(--lh-body-xs)}
   .ps-foot{margin-top:auto;padding-top:12px}
 
   /* ---------- KPI grid ---------- */
@@ -297,8 +303,9 @@
 
   /* chips */
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-  .chip{font-size:var(--body-compact);font-weight:500;color:var(--primary);background:#fff;border:1px solid var(--border);border-radius:99px;padding:6px 13px;cursor:pointer;transition:.14s;font-family:inherit}
-  .chip:hover{background:var(--rose);border-color:var(--coral)}
+  .chip{font-size:var(--body-compact);font-weight:500;color:var(--primary);background:#fff;border:1px solid var(--border);border-radius:99px;padding:6px 13px;cursor:pointer;transition:background-color 140ms ease-out, border-color 140ms ease-out;font-family:inherit}
+  @media(hover:hover) and (pointer:fine){.chip:hover{background:var(--rose);border-color:var(--coral)}}
+  .chip:active{transform:scale(0.97)}
   .chip.active{background:var(--primary);color:#fff;border-color:var(--primary)}
 
   /* keyvals */
@@ -309,7 +316,7 @@
 
   /* risk card */
   .risk-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
-  .risk-badge{font-size:var(--body-xs);font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:5px 10px;border-radius:8px}
+  .risk-badge{font-size:var(--body-xs);font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:5px 10px;border-radius:var(--radius)}
   .risk-high{background:#FDEAE8;color:var(--signal)}
   .risk-med{background:#FDF1E3;color:var(--warning)}
   .risk-vert{background:#EAF0F8;color:var(--info)}
@@ -323,7 +330,7 @@
   .sov .ring-row{display:flex;align-items:center;gap:18px}
   .sov .wow{font-size:var(--body-compact);font-weight:500;color:var(--signal);display:inline-flex;align-items:center;gap:5px;margin-top:8px}
   .sov .wow svg{transform:rotate(0deg)}
-  .sov .meta{font-size:12px;color:var(--muted);margin-top:10px}
+  .sov .meta{font-size:var(--body-xs);color:var(--muted);margin-top:10px}
   .ring{--p:0;width:84px;height:84px;flex:none;border-radius:50%;
     background:conic-gradient(var(--coral) calc(var(--p)*1%), var(--rose) 0);
     display:grid;place-items:center;position:relative}
@@ -333,16 +340,16 @@
   /* signal cards (expandable) */
   .sig{padding:0;overflow:hidden}
   .sig-head{display:flex;gap:14px;align-items:flex-start;padding:20px 22px;cursor:pointer;width:100%;background:none;border:none;text-align:left;font-family:inherit}
-  .sig-rank{font-family:var(--num);font-size:var(--display-sm);font-weight:500;color:rgba(255,107,76,.4);line-height:1;flex:none;width:42px}
+  .sig-rank{font-family:var(--num);font-size:var(--display-sm);font-weight:500;color:rgba(208,63,26,.35);line-height:1;flex:none;width:42px}
   .sig-body-head{flex:1}
   .sig-type{font-size:var(--body-xs);font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--signal)}
   .sig-title{font-size:var(--title-6);line-height:var(--lh-title-6);font-weight:500;margin:5px 0 7px;letter-spacing:-.01em}
   .sig-signal{font-size:var(--body-compact);line-height:var(--lh-body-compact);color:var(--muted);display:block;margin-top:4px}
-  .sig-toggle{flex:none;width:30px;height:30px;border-radius:8px;border:1px solid var(--border);background:#fff;display:grid;place-items:center;transition:.18s;color:var(--primary)}
+  .sig-toggle{flex:none;width:30px;height:30px;border-radius:var(--radius);border:1px solid var(--border);background:#fff;display:grid;place-items:center;transition:transform 180ms ease-out, background-color 180ms ease-out;color:var(--primary)}
   .sig.open .sig-toggle{transform:rotate(180deg);background:var(--primary);color:#fff;border-color:var(--primary)}
-  .sig-detail{max-height:0;overflow:hidden;transition:max-height .32s ease}
-  .sig.open .sig-detail{max-height:520px}
-  .sig-detail-inner{padding:0 22px 22px 78px;display:grid;gap:14px}
+  .sig-detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows 260ms var(--ease-out)}
+  .sig.open .sig-detail{grid-template-rows:1fr}
+  .sig-detail-inner{padding:0 22px 22px 78px;display:grid;gap:14px;overflow:hidden;min-height:0}
   .sig-block .k{font-size:var(--body-xs);font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--primary);margin-bottom:4px}
   .sig-block p{font-size:var(--body-s);line-height:var(--lh-body-s);color:var(--text)}
   .sig-status{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-top:6px}
@@ -350,9 +357,10 @@
 
   /* product views */
   .pv-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
-  .pv-tab{font-family:inherit;font-size:var(--body-compact);font-weight:500;color:var(--muted);background:#fff;border:1px solid var(--border);border-radius:99px;padding:9px 16px;cursor:pointer;transition:.15s}
-  .pv-tab:hover{border-color:var(--coral);color:var(--primary)}
-  .pv-tab.active{background:var(--primary);color:#fff;border-color:var(--primary);box-shadow:0 4px 12px rgba(255,107,76,.25)}
+  .pv-tab{font-family:inherit;font-size:var(--body-compact);font-weight:500;color:var(--muted);background:#fff;border:1px solid var(--border);border-radius:99px;padding:9px 16px;cursor:pointer;transition:color 150ms ease-out, background-color 150ms ease-out, border-color 150ms ease-out}
+  @media(hover:hover) and (pointer:fine){.pv-tab:hover{border-color:var(--coral);color:var(--primary)}}
+  .pv-tab:active{transform:scale(0.97)}
+  .pv-tab.active{background:var(--primary);color:#fff;border-color:var(--primary);box-shadow:0 4px 12px rgba(208,63,26,.22)}
   .pv-panel{display:none}
   .pv-panel.active{display:block;animation:fade .3s ease}
   @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
@@ -382,8 +390,8 @@
   .ask-a .ans .cav{color:var(--signal);font-size:var(--body-compact)}
   .ask-status{margin-top:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
   .ask-input{display:flex;gap:10px;margin-top:18px}
-  .ask-input input{flex:1;font-family:inherit;font-size:var(--body-s);padding:12px 16px;border:1px solid var(--border);border-radius:11px;background:#fff;color:var(--text)}
-  .ask-input input:focus{outline:none;border-color:var(--coral);box-shadow:0 0 0 3px rgba(255,107,94,.16)}
+  .ask-input input{flex:1;font-family:inherit;font-size:var(--body-s);padding:12px 16px;border:1px solid var(--border);border-radius:var(--radius);background:#fff;color:var(--text)}
+  .ask-input input:focus{outline:none;border-color:var(--coral);box-shadow:0 0 0 3px rgba(208,63,26,.14)}
 
   /* analyst review */
   .rev-summary{display:grid;gap:12px;margin-bottom:8px}
@@ -405,7 +413,7 @@
   /* confidence labels */
   .conf-grid{display:grid;gap:12px}
   @media(min-width:680px){.conf-grid{grid-template-columns:repeat(3,1fr)}}
-  .conf{background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;border-left:4px solid var(--border)}
+  .conf{background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px}
   .conf.live{border-left-color:var(--coral)}
   .conf.auto{border-left-color:var(--success)}
   .conf.needs{border-left-color:var(--warning)}
@@ -430,13 +438,13 @@
   .list-box.cannot li::before{background:var(--signal)}
 
   /* takeaway */
-  .takeaway{background:var(--deep);color:#fff;border-radius:var(--radius);padding:40px;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
-  .takeaway::after{content:"";position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(255,107,76,.22),transparent 70%)}
+  .takeaway{background:var(--deep);color:#fff;border-radius:var(--radius);padding:54px 48px;box-shadow:var(--shadow-lg);position:relative;overflow:hidden;display:grid;grid-template-columns:1fr 1.4fr;gap:48px;align-items:start}
+  .takeaway::after{display:none}
   .takeaway .eyebrow{color:var(--blush)}
-  .takeaway h2{font-size:clamp(var(--title-5),3.4vw,var(--title-4));font-weight:500;margin:10px 0 18px;letter-spacing:-.015em;position:relative}
-  .takeaway p{font-size:var(--body-s);line-height:var(--lh-body-s);color:rgba(251,244,225,.75);max-width:760px;position:relative}
+  .takeaway h2{font-size:var(--title-2);line-height:var(--lh-title-2);font-weight:500;margin:0;letter-spacing:-.015em;position:relative}
+  .takeaway p{font-size:var(--body-s);line-height:var(--lh-body-s);color:#ffffff;max-width:760px;position:relative}
   .takeaway p + p{margin-top:14px}
-  .takeaway p b{color:#fff}
+  .takeaway p b{color:#FF8970;font-weight:500}
   .takeaway .btn-row{margin-top:26px;position:relative}
   .takeaway .btn{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.22);color:#fff}
   .takeaway .btn:hover{background:#fff;color:var(--primary)}
@@ -451,7 +459,7 @@
   .scrim{position:fixed;inset:0;background:rgba(28,20,18,.5);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:.28s;z-index:90}
   .scrim.open{opacity:1;pointer-events:auto}
   .drawer{position:fixed;top:0;right:0;height:100%;width:min(480px,94vw);background:var(--bg);box-shadow:var(--shadow-lg);
-    transform:translateX(100%);transition:transform .32s cubic-bezier(.4,0,.2,1);z-index:95;display:flex;flex-direction:column}
+    transform:translateX(100%);transition:transform 320ms var(--ease-drawer);z-index:95;display:flex;flex-direction:column}
   .drawer.open{transform:none}
   .drawer-head{padding:20px 22px;background:var(--deep);color:#fff;display:flex;justify-content:space-between;align-items:flex-start}
   .drawer-head .eyebrow{color:var(--blush)}
@@ -466,6 +474,46 @@
   .footnote{font-size:var(--body-xs);line-height:var(--lh-body-xs);color:var(--muted);font-style:italic;margin-top:8px}
 
   :focus-visible{outline:2px solid var(--signal);outline-offset:2px;border-radius:4px}
+
+  /* ---------- scroll reveals ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(10px);
+    transition:opacity 420ms var(--ease-out), transform 420ms var(--ease-out);
+  }
+  .reveal.is-visible{opacity:1;transform:translateY(0)}
+
+  /* stagger for summary cards */
+  #summary .card{
+    opacity:0;
+    transform:translateY(10px);
+    transition:opacity 380ms var(--ease-out), transform 380ms var(--ease-out);
+    transition-delay:var(--stagger, 0ms);
+  }
+  #summary .card.is-visible{opacity:1;transform:translateY(0)}
+
+  /* meter bar animation */
+  .kpi .meter i{
+    transform-origin:left;
+    transform:scaleX(0);
+    transition:transform 700ms var(--ease-out);
+  }
+  .kpi.is-visible .meter i{transform:scaleX(1)}
+
+  /* ev-num value stagger */
+  .ev-num .v{
+    opacity:0;
+    transform:translateY(6px);
+    transition:opacity 400ms var(--ease-out), transform 400ms var(--ease-out);
+    transition-delay:var(--stagger, 0ms);
+  }
+  .ev-panel.is-visible .ev-num .v{opacity:1;transform:translateY(0)}
+
+  @media(prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+    .sig-detail{transition:none}
+    .reveal,.kpi .meter i,.ev-num .v,#summary .card{opacity:1;transform:none;transition:none}
+  }
 </style>
 </head>
 <body>
@@ -551,7 +599,7 @@
 
 <!-- ============ PRIORITY SIGNAL SUMMARY CARDS ============ -->
 <section id="summary">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <span class="eyebrow">Priority signals · at a glance</span>
     <h2>Six things shaping O2's position right now</h2>
     <p>The most important signals across visibility, movement, price, promotion, retailers and analyst review.</p>
@@ -611,7 +659,7 @@
 
 <!-- ============ O2 POSITION NOW ============ -->
 <section id="position">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <span class="eyebrow">Now · O2 position</span>
     <h2>O2 position now</h2>
     <p>A current view of O2's ranked visibility, market presence, promotion exposure and channel coverage.</p>
@@ -683,7 +731,7 @@
 <!-- ============ VISIBILITY DRIVERS ============ -->
 <section id="drivers" style="background:#fff">
   <div class="wrap">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <span class="eyebrow">Handsets</span>
     <h2>What is driving O2's top-rank visibility?</h2>
     <p>O2's #1 visibility is not evenly distributed across all devices. A small number of devices and channels are doing much of the work.</p>
@@ -746,7 +794,7 @@
 
 <section id="networks" style="background:#fff">
   <div class="wrap">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <span class="eyebrow">Networks</span>
     <h2>Who is converting presence into visibility?</h2>
     <p>Compare listing share with #1 and Top 3 rank share to see which networks are over- or under-indexing in ranked visibility.</p>
@@ -805,7 +853,7 @@
 </div><!-- close wrap -->
 <section id="retailers" style="background:#fff">
   <div class="wrap">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <span class="eyebrow">Retailers</span>
     <h2>Where is O2 visible, weak or absent?</h2>
     <p>O2's current visibility is uneven by channel. The strongest positions are in specialist and direct channels, while comparison and affiliate environments look weaker.</p>
@@ -824,13 +872,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td><b>MobilePhonesDirect</b></td><td class="heat" style="background:rgba(255,107,94,.34)">34.4%</td><td class="heat" style="background:rgba(255,107,94,.62)">70.0%</td><td class="heat" style="background:rgba(255,107,94,.36)">35.7%</td><td><span class="status-chip st-strong">Strong · defend</span></td></tr>
-          <tr><td><b>Buymobiles</b></td><td class="heat" style="background:rgba(255,107,94,.33)">33.3%</td><td class="heat" style="background:rgba(255,107,94,.4)">40.0%</td><td class="heat" style="background:rgba(255,107,94,.36)">35.7%</td><td><span class="status-chip st-strong">Strong · defend</span></td></tr>
-          <tr><td><b>Samsung</b></td><td class="heat" style="background:rgba(255,107,94,.31)">31.5%</td><td class="heat" style="background:rgba(255,107,94,.34)">33.3%</td><td class="heat" style="background:rgba(255,107,94,.33)">33.3%</td><td><span class="status-chip st-strategic">Strategic · defend</span></td></tr>
-          <tr><td><b>Affordable Mobiles</b></td><td class="heat" style="background:rgba(255,107,94,.26)">26.4%</td><td class="heat" style="background:rgba(255,107,94,.44)">44.4%</td><td class="heat" style="background:rgba(255,107,94,.33)">33.3%</td><td><span class="status-chip st-strong">Strong · protect</span></td></tr>
-          <tr><td><b>Uswitch</b></td><td class="heat" style="background:rgba(255,107,94,.1)">9.2%</td><td class="heat" style="background:rgba(255,107,94,.25)">25.0%</td><td class="heat" style="background:rgba(255,107,94,.08)">7.9%</td><td><span class="status-chip st-mixed">Mixed · improve</span></td></tr>
-          <tr><td><b>Money Saving Expert</b></td><td class="heat" style="background:rgba(255,107,94,.02)">1.0%</td><td class="heat">0.0%</td><td class="heat">0.0%</td><td><span class="status-chip st-weak">Weak · investigate</span></td></tr>
-          <tr><td><b>MoneySuperMarket</b></td><td class="heat">0.3%</td><td class="heat" style="background:rgba(255,107,94,.1)">10.0%</td><td class="heat" style="background:rgba(255,107,94,.03)">3.3%</td><td><span class="status-chip st-weak">Weak · investigate</span></td></tr>
+          <tr><td><b>MobilePhonesDirect</b></td><td class="heat" style="background:rgba(208,63,26,.34)">34.4%</td><td class="heat" style="background:rgba(208,63,26,.62)">70.0%</td><td class="heat" style="background:rgba(208,63,26,.36)">35.7%</td><td><span class="status-chip st-strong">Strong · defend</span></td></tr>
+          <tr><td><b>Buymobiles</b></td><td class="heat" style="background:rgba(208,63,26,.33)">33.3%</td><td class="heat" style="background:rgba(208,63,26,.4)">40.0%</td><td class="heat" style="background:rgba(208,63,26,.36)">35.7%</td><td><span class="status-chip st-strong">Strong · defend</span></td></tr>
+          <tr><td><b>Samsung</b></td><td class="heat" style="background:rgba(208,63,26,.31)">31.5%</td><td class="heat" style="background:rgba(208,63,26,.34)">33.3%</td><td class="heat" style="background:rgba(208,63,26,.33)">33.3%</td><td><span class="status-chip st-strategic">Strategic · defend</span></td></tr>
+          <tr><td><b>Affordable Mobiles</b></td><td class="heat" style="background:rgba(208,63,26,.26)">26.4%</td><td class="heat" style="background:rgba(208,63,26,.44)">44.4%</td><td class="heat" style="background:rgba(208,63,26,.33)">33.3%</td><td><span class="status-chip st-strong">Strong · protect</span></td></tr>
+          <tr><td><b>Uswitch</b></td><td class="heat" style="background:rgba(208,63,26,.1)">9.2%</td><td class="heat" style="background:rgba(208,63,26,.25)">25.0%</td><td class="heat" style="background:rgba(208,63,26,.08)">7.9%</td><td><span class="status-chip st-mixed">Mixed · improve</span></td></tr>
+          <tr><td><b>Money Saving Expert</b></td><td class="heat" style="background:rgba(208,63,26,.02)">1.0%</td><td class="heat">0.0%</td><td class="heat">0.0%</td><td><span class="status-chip st-weak">Weak · investigate</span></td></tr>
+          <tr><td><b>MoneySuperMarket</b></td><td class="heat">0.3%</td><td class="heat" style="background:rgba(208,63,26,.1)">10.0%</td><td class="heat" style="background:rgba(208,63,26,.03)">3.3%</td><td><span class="status-chip st-weak">Weak · investigate</span></td></tr>
           <tr><td><b>Fonehouse</b></td><td class="heat">0.0%</td><td class="heat">0.0%</td><td class="heat">0.0%</td><td><span class="status-chip st-absent">Absent in captured data · validate</span></td></tr>
           <tr><td><b>Carphone Warehouse</b></td><td class="heat">0.0%</td><td class="heat">0.0%</td><td class="heat">0.0%</td><td><span class="status-chip st-absent">Absent in captured data · validate</span></td></tr>
         </tbody>
@@ -875,7 +923,7 @@
 <!-- ============ PROMOTION MONITOR ============ -->
 <section id="promotions" style="background:#fff;border-top:1px solid var(--border)">
   <div class="wrap">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <span class="eyebrow">Promotions</span>
     <h2>Which visibility is promotion-supported?</h2>
     <p>Promotion activity can support visibility, but it should not automatically be treated as the cause of ranking performance.</p>
@@ -959,7 +1007,7 @@
 </div><!-- close wrap -->
 <section id="pricing" style="background:#fff;border-top:1px solid var(--border)">
   <div class="wrap">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <span class="eyebrow">Pricing</span>
     <h2>Where is O2 exposed on value?</h2>
     <p>Price competitiveness should be assessed by device, storage, data allowance, contract length, upfront cost, monthly cost, total cost and promotion mechanic.</p>
@@ -1028,16 +1076,10 @@
 </div><!-- close wrap -->
 <section id="newsletter" style="background:#fff;border-top:1px solid var(--border)">
   <div class="wrap">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <span class="eyebrow">Newsletters</span>
     <h2>How visible is O2 in affiliate and newsletter channels?</h2>
     <p>Newsletter and affiliate visibility updates when new partner newsletters are received and processed.</p>
-  </div>
-
-  <div class="insight" style="margin-bottom:22px;background:var(--rose);border-color:var(--blush)">
-    <span class="k" style="color:var(--primary)">FDM+ Analysis</span>
-    <p style="margin-top:6px">O2 is under-featured in affiliate and newsletter visibility compared with its stronger specialist/direct ranking performance. O2 has 23% SOV in the broader newsletter cut and 30% SOV in the MPD / Buymobiles / Affordable Mobiles cut, with only three O2 plans featured in each view.</p>
-    <p style="margin-top:10px">The broader cut shows O2 down 39pp WoW, while the narrower cut shows O2 down 50pp WoW. Source-level evidence shows O2 appearing in Buymobiles, but not in several other newsletter sources, including Fonehouse, MPD, Money Saving Expert and MoneySuperMarket.</p>
   </div>
 
   <div class="ps-label" style="margin-bottom:12px">Source-level evidence</div>
@@ -1063,6 +1105,12 @@
         </tbody>
       </table>
     </div>
+  </div>
+
+  <div class="insight" style="margin-bottom:22px;background:var(--rose);border-color:var(--blush)">
+    <span class="k" style="color:var(--primary)">FDM+ Analysis</span>
+    <p style="margin-top:6px">O2 is under-featured in affiliate and newsletter visibility compared with its stronger specialist/direct ranking performance. O2 has 23% SOV in the broader newsletter cut and 30% SOV in the MPD / Buymobiles / Affordable Mobiles cut, with only three O2 plans featured in each view.</p>
+    <p style="margin-top:10px">The broader cut shows O2 down 39pp WoW, while the narrower cut shows O2 down 50pp WoW. Source-level evidence shows O2 appearing in Buymobiles, but not in several other newsletter sources, including Fonehouse, MPD, Money Saving Expert and MoneySuperMarket.</p>
   </div>
 
   <div class="grid cols-2" style="align-items:start;margin-bottom:22px">
@@ -1091,7 +1139,7 @@
 
 <!-- ============ PRIORITY SIGNALS ============ -->
 <section id="signals">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <h2>Priority signals</h2>
     <p>The most important current market signals, ranked by O2 relevance, commercial impact and evidence confidence.</p>
   </div>
@@ -1212,7 +1260,7 @@
 
 <!-- ============ PRODUCT VIEWS ============ -->
 <section id="products" style="display:none">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <span class="eyebrow">Live workspace</span>
     <h2>Product views</h2>
     <p>Different market areas move at different speeds. FDM+ makes the latest available state visible for each product area and shows the refresh model clearly.</p>
@@ -1289,7 +1337,7 @@
 
 <!-- ============ ASK FDM+ ============ -->
 <section id="ask" style="display:none">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <span class="eyebrow">AI-assisted · analyst-governed</span>
     <h2>Ask FDM+</h2>
     <p>Ask questions about current market movement, competitor threats, price competitiveness, promotion impact, retailer coverage and evidence.</p>
@@ -1356,7 +1404,7 @@
 
 <!-- ============ ANALYST REVIEW ============ -->
 <section id="review" style="display:none">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <span class="eyebrow">Review · governance</span>
     <h2>Analyst review</h2>
     <p>AI detects and drafts market interpretation. Analysts decide what is accurate, useful and safe for customers.</p>
@@ -1418,7 +1466,7 @@
 
 <!-- ============ SAVED VIEWS ============ -->
 <section id="saved" style="display:none">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <span class="eyebrow">Saved view · share</span>
     <h2>Saved views and briefings</h2>
     <p>Save dashboard states, create approved summaries and share evidence without turning the product back into a static reporting workflow.</p>
@@ -1466,7 +1514,7 @@
 
 <!-- ============ DATA FRESHNESS & CONFIDENCE ============ -->
 <section id="confidence" style="display:none">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <span class="eyebrow">Evidence · caveat</span>
     <h2>Data freshness and confidence</h2>
     <p>FDM+ shows how fresh each data type is, what it can support and where analyst interpretation is required.</p>
@@ -1540,18 +1588,13 @@
 <!-- ============ FINAL TAKEAWAY ============ -->
 <section style="border:none">
   <div class="wrap">
-    <div class="takeaway">
+    <div class="takeaway reveal">
       <h2>What O2 should focus on now</h2>
-      <p>O2 is converting selective presence into strong top-rank visibility. In the latest ranking capture, O2 has <b>15.6% listing share</b> but <b>25.3% #1 rank share</b>, showing that it is over-indexing where it is present.</p>
-      <p>The movement since the previous capture is modest but directionally positive: O2 listing share is up <b>+0.3pp</b>, #1 rank share is up <b>+0.5pp</b>, and promotion-supported listings are up <b>+5.7pp</b>. The biggest watchout is that visibility is increasingly promotion-supported.</p>
-      <p>The opportunity is to defend strong specialist and direct channels, especially <b>MobilePhonesDirect, Buymobiles, Samsung and Affordable Mobiles</b>. The risks are weaker comparison and affiliate visibility, apparent retailer gaps in <b>Fonehouse and Carphone Warehouse</b>, heavy promotion-supported visibility at <b>92.5%</b>, and flagship Apple price pressure from <b>Three</b>.</p>
-      <p>The next action is to validate channel gaps, classify promotion mechanics, open the device-driver view, and keep <b>iPhone 17 Pro Max</b> on the live price watchlist.</p>
-      <div class="btn-row">
-        <button class="btn primary" data-drawer>Open evidence</button>
-        <button class="btn" onclick="document.getElementById('ask').scrollIntoView()">Ask FDM+</button>
-        <button class="btn" onclick="document.getElementById('drivers').scrollIntoView()">Open device drivers</button>
-        <button class="btn">Save live view</button>
-        <button class="btn">Send for analyst review</button>
+      <div>
+        <p style="font-size:var(--body-l);line-height:var(--lh-body-l);color:#ffffff">O2 is converting selective presence into strong top-rank visibility. In the latest ranking capture, O2 has <b>15.6% listing share</b> but <b>25.3% #1 rank share</b>, showing that it is over-indexing where it is present.</p>
+        <p style="margin-top:18px">The movement since the previous capture is modest but directionally positive: O2 listing share is up <b>+0.3pp</b>, #1 rank share is up <b>+0.5pp</b>, and promotion-supported listings are up <b>+5.7pp</b>. The biggest watchout is that visibility is increasingly promotion-supported.</p>
+        <p style="margin-top:14px">The opportunity is to defend strong specialist and direct channels, especially <b>MobilePhonesDirect, Buymobiles, Samsung and Affordable Mobiles</b>. The risks are weaker comparison and affiliate visibility, apparent retailer gaps in <b>Fonehouse and Carphone Warehouse</b>, heavy promotion-supported visibility at <b>92.5%</b>, and flagship Apple price pressure from <b>Three</b>.</p>
+        <p style="margin-top:14px">The next action is to validate channel gaps, classify promotion mechanics, open the device-driver view, and keep <b>iPhone 17 Pro Max</b> on the live price watchlist.</p>
       </div>
     </div>
   </div>
@@ -1652,6 +1695,42 @@
   document.querySelectorAll('#askChips .chip').forEach(c=>{
     c.addEventListener('click',()=>{askQ.textContent=c.textContent;askQ.closest('.ask-q').scrollIntoView({block:'center'});});
   });
+
+  // ---- Scroll reveals ----
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('is-visible'); revealObs.unobserve(e.target); }});
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  // ---- Summary cards stagger ----
+  document.querySelectorAll('#summary .card').forEach((card, i) => {
+    card.style.setProperty('--stagger', `${i * 55}ms`);
+  });
+
+  const cardObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('is-visible'); cardObs.unobserve(e.target); }});
+  }, { threshold: 0.05 });
+
+  document.querySelectorAll('#summary .card').forEach(el => cardObs.observe(el));
+
+  // ---- KPI meter bars ----
+  const kpiObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('is-visible'); kpiObs.unobserve(e.target); }});
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.kpi').forEach(el => kpiObs.observe(el));
+
+  // ---- EV panel number stagger ----
+  document.querySelectorAll('.ev-num .v').forEach((v, i) => {
+    v.style.setProperty('--stagger', `${80 + i * 80}ms`);
+  });
+
+  const evObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('is-visible'); evObs.unobserve(e.target); }});
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.ev-panel').forEach(el => evObs.observe(el));
 </script>
 </body>
 </html>
