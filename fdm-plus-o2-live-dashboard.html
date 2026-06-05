@@ -204,6 +204,10 @@
   .ev-num .v{font-family:var(--num);font-size:var(--display-lg);font-weight:600;letter-spacing:-.02em;color:var(--primary);font-variant-numeric:tabular-nums;line-height:1}
   .ev-num .v sup{font-size:.45em;vertical-align:super;font-weight:600;letter-spacing:0}
   .ev-num .k{font-size:var(--body-compact);line-height:var(--lh-body-compact);color:var(--text);font-weight:600;margin-top:12px}
+  .ev-num .t{font-size:var(--body-xs);font-weight:500;margin-top:3px}
+  .ev-num .t.up{color:var(--success)}
+  .ev-num .t.down{color:var(--signal)}
+  .ev-num .t.flat{color:var(--muted)}
   .ev-stat.momentum .ev-num .v{font-size:var(--display-sm)}
   .ev-caveat{padding:14px 18px;background:var(--surface-warm);font-size:12px;color:var(--muted);line-height:1.5;display:flex;gap:9px;align-items:flex-start}
   .ev-caveat svg{flex:none;color:var(--signal);margin-top:1px}
@@ -225,6 +229,11 @@
   .kpi .val{font-family:var(--num);font-size:var(--display-md);font-weight:500;letter-spacing:-.025em;line-height:1;margin:8px 0 6px;color:var(--primary);font-variant-numeric:tabular-nums}
   .kpi .val.sm{font-size:var(--display-sm)}
   .kpi p{font-size:var(--body-s);line-height:var(--lh-body-s);margin-top:16px}
+  .kpi-val-row{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+  .kpi-trend{font-size:var(--body-xs);font-weight:500;color:var(--muted);white-space:nowrap;padding-bottom:6px;display:flex;align-items:center;gap:3px}
+  .kpi-trend.up{color:var(--success)}
+  .kpi-trend.down{color:var(--signal)}
+  .kpi-trend.flat{color:var(--muted)}
   .kpi .meter{height:6px;border-radius:99px;background:var(--rose);overflow:hidden;margin:12px 0 8px}
   .kpi .meter i{display:block;height:100%;border-radius:99px;background:var(--primary)}
   .kpi .micro{font-size:var(--body-xs);line-height:var(--lh-body-xs);color:var(--muted);font-weight:500;display:flex;align-items:center;gap:5px}
@@ -516,17 +525,17 @@
       <div class="ev-stat">
         <div class="lab">Competitive snapshot</div>
         <div class="nums">
-          <div class="ev-num"><div class="v">15.6<sup>%</sup></div><div class="k">Listing share</div></div>
-          <div class="ev-num"><div class="v">25.3<sup>%</sup></div><div class="k">#1 rank share</div></div>
-          <div class="ev-num"><div class="v">17<sup>%</sup></div><div class="k">Top 3 rank share</div></div>
+          <div class="ev-num"><div class="v">15.6<sup>%</sup></div><div class="k">Listing share</div><div class="t up">↑ +0.3pp</div></div>
+          <div class="ev-num"><div class="v">25.3<sup>%</sup></div><div class="k">#1 rank share</div><div class="t up">↑ +0.5pp</div></div>
+          <div class="ev-num"><div class="v">17<sup>%</sup></div><div class="k">Top 3 rank share</div><div class="t down">↓ −0.1pp</div></div>
         </div>
       </div>
       <div class="ev-stat momentum">
         <div class="lab">Momentum view (Latest 13 weeks)</div>
         <div class="nums">
-          <div class="ev-num"><div class="v">14.2<sup>%</sup></div><div class="k">Listing share</div></div>
-          <div class="ev-num"><div class="v">24.2<sup>%</sup></div><div class="k">#1 rank share</div></div>
-          <div class="ev-num"><div class="v">17.1<sup>%</sup></div><div class="k">Top 3 rank share</div></div>
+          <div class="ev-num"><div class="v">14.2<sup>%</sup></div><div class="k">Listing share</div><div class="t up">↑ +0.2pp</div></div>
+          <div class="ev-num"><div class="v">24.2<sup>%</sup></div><div class="k">#1 rank share</div><div class="t up">↑ +0.4pp</div></div>
+          <div class="ev-num"><div class="v">17.1<sup>%</sup></div><div class="k">Top 3 rank share</div><div class="t flat">= No change</div></div>
         </div>
       </div>
     </aside>
@@ -607,56 +616,56 @@
 
     <article class="card kpi">
       <div class="lab">Listing share</div>
-      <div class="val">15.6%</div>
+      <div class="kpi-val-row"><div class="val">15.6%</div><span class="kpi-trend up">↑ 0.3% on last week</span></div>
       <div class="meter"><i style="width:15.6%"></i></div>
       <p>O2's share of all ranked listings in the current ranking capture.</p>
     </article>
 
     <article class="card kpi">
       <div class="lab">#1 rank share</div>
-      <div class="val">25.3%</div>
+      <div class="kpi-val-row"><div class="val">25.3%</div><span class="kpi-trend up">↑ 0.5% on last week</span></div>
       <div class="meter"><i style="width:25.3%"></i></div>
       <p>O2's share of all first-ranked positions.</p>
     </article>
 
     <article class="card kpi">
       <div class="lab">Top 3 rank share</div>
-      <div class="val">17.0%</div>
+      <div class="kpi-val-row"><div class="val">17.0%</div><span class="kpi-trend down">↓ 0.1% on last week</span></div>
       <div class="meter"><i style="width:17%"></i></div>
       <p>O2's share of Top 3 ranked positions.</p>
     </article>
 
     <article class="card kpi">
       <div class="lab">13-week #1 rank share</div>
-      <div class="val">24.2%</div>
+      <div class="kpi-val-row"><div class="val">24.2%</div><span class="kpi-trend up">↑ 0.7% on last week</span></div>
       <div class="meter"><i style="width:24.2%"></i></div>
       <p>O2's #1 visibility across the latest 13-week view.</p>
     </article>
 
     <article class="card kpi">
       <div class="lab">13-week Top 3 share</div>
-      <div class="val">17.1%</div>
+      <div class="kpi-val-row"><div class="val">17.1%</div><span class="kpi-trend up">↑ 0.5% on last week</span></div>
       <div class="meter"><i style="width:17.1%"></i></div>
       <p>O2's Top 3 visibility across the latest 13-week view.</p>
     </article>
 
     <article class="card kpi">
       <div class="lab">Promotion-supported listings</div>
-      <div class="val sm">92.5%</div>
+      <div class="kpi-val-row"><div class="val sm">92.5%</div><span class="kpi-trend up">↑ 5.7% on last week</span></div>
       <div class="meter"><i style="width:92.5%"></i></div>
       <p>Share of O2 listings with promotion detail, extra-data promotion or promoted-deal tagging.</p>
     </article>
 
     <article class="card kpi">
       <div class="lab">Retailer coverage</div>
-      <div class="val">77.8%</div>
+      <div class="kpi-val-row"><div class="val">77.8%</div><span class="kpi-trend flat">= No change</span></div>
       <div class="meter"><i style="width:77.8%"></i></div>
       <p>O2 appears in 7 of 9 tracked retailers in the current ranking capture.</p>
     </article>
 
     <article class="card kpi">
       <div class="lab">Retailer gaps</div>
-      <div class="val">2</div>
+      <div class="kpi-val-row"><div class="val">2</div><span class="kpi-trend flat">= No change</span></div>
       <div class="meter"><i style="width:22%"></i></div>
       <p>Fonehouse and Carphone Warehouse show no O2 rows in the current captured ranking view.</p>
     </article>
