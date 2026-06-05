@@ -12,10 +12,10 @@
     --bg:#F2EEED;
     --surface:#FFFFFF;
     --surface-warm:#FFF3EE;
-    --primary:#D03F1A;
+    --primary:#FF6B4C;
     --deep:#4F0702;
     --signal:#C02800;
-    --coral:#D03F1A;
+    --coral:#FF6B4C;
     --blush:#FFE4DC;
     --rose:#FFF0EB;
     --text:#171717;
@@ -288,12 +288,17 @@
   /* analyst note / insight blocks */
   .insight{background:var(--surface-warm);border:1px solid var(--blush);border-radius:var(--radius-sm);padding:16px 18px;font-size:var(--body-s);line-height:var(--lh-body-s);box-sizing:border-box}
   .grid > .insight{height:100%}
-  .insight .k{font-size:var(--body-xs);line-height:var(--lh-body-xs);font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--primary);display:block;margin-bottom:6px}
+  .insight .k{font-size:var(--body-s);font-weight:600;color:var(--primary);display:block;margin-bottom:6px;letter-spacing:0;text-transform:none}
   .insight p+p{margin-top:10px}
-  .insight.analysis{background:var(--deep);border-color:var(--deep);color:#fff}
-  .insight.analysis .k{color:#FF8970}
+
+  /* FDM+ Analysis two-column layout */
+  .insight.analysis{display:grid;grid-template-columns:120px 1fr;gap:28px;align-items:start;background:var(--deep);border-color:var(--deep);color:#fff}
+  .analysis-lhs{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+  .analysis-icon{width:24px;height:24px;border-radius:6px;display:block}
+  .insight.analysis .k{font-size:var(--body-m);line-height:var(--lh-body-m);font-weight:600;color:#FF8970;margin-bottom:0;letter-spacing:0;text-transform:none}
   .insight.analysis p{color:#fff}
   .insight.analysis b,.insight.analysis strong{color:#fff}
+  .insight.analysis .analysis-rhs p+p{margin-top:10px}
   .insight.caveat{background:var(--rose);border-color:var(--blush)}
   .insight.caveat .k{color:var(--signal)}
 
@@ -461,6 +466,108 @@
   footer.foot .proto-note{margin-bottom:18px}
   footer.foot .fwm{font-weight:500;color:var(--text);font-size:var(--body-m);line-height:var(--lh-body-m);letter-spacing:-.02em;margin-bottom:8px}
 
+  /* ---------- focus input validation ---------- */
+  .focus-input-wrap.has-error .focus-input-row{box-shadow:0 0 0 2px var(--signal)}
+  .focus-error-msg{font-size:var(--body-xs);color:var(--signal);margin-top:6px;display:none}
+  .focus-input-wrap.has-error .focus-error-msg{display:block}
+
+  /* ---------- focus drawer backdrop ---------- */
+  .focus-drawer-backdrop{position:fixed;inset:0;background:rgba(28,20,18,.48);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity 280ms ease-out;z-index:100}
+  .focus-drawer-backdrop.is-open{opacity:1;pointer-events:auto}
+
+  /* ---------- focus drawer ---------- */
+  .focus-drawer{
+    position:fixed;top:0;right:0;height:100%;
+    width:50vw;max-width:760px;min-width:560px;
+    background:var(--bg);
+    box-shadow:-4px 0 40px rgba(0,0,0,.18);
+    transform:translateX(100%);
+    transition:transform 340ms var(--ease-drawer);
+    z-index:101;
+    display:flex;flex-direction:column;
+    overflow:hidden;
+  }
+  .focus-drawer.is-open{transform:none}
+  @media(max-width:640px){.focus-drawer{width:100%;min-width:0}}
+
+  .focus-drawer__header{
+    padding:22px 24px 20px;
+    background:var(--deep);
+    color:#fff;
+    flex:none;
+  }
+  .focus-drawer__header .eyebrow{color:rgba(255,183,166,.85);margin-bottom:6px;display:block}
+  .focus-drawer__title{font-size:var(--title-5);line-height:var(--lh-title-5);font-weight:500;color:#fff;margin:0 0 6px}
+  .focus-drawer__subtitle{font-size:var(--body-xs);color:rgba(255,255,255,.6);line-height:1.5;margin-bottom:14px}
+  .focus-drawer__chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+  .focus-chip{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.85);white-space:nowrap}
+  .focus-chip.hi{background:rgba(232,67,26,.25);border-color:rgba(232,67,26,.4);color:#ffb3a0}
+  .focus-drawer__close{position:absolute;top:18px;right:18px;width:32px;height:32px;border-radius:8px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;cursor:pointer;display:grid;place-items:center;font-size:18px;font-family:inherit;transition:background 150ms ease-out}
+  .focus-drawer__close:hover{background:rgba(255,255,255,.22)}
+
+  .focus-drawer__body{flex:1;overflow-y:auto;padding:24px;display:flex;flex-direction:column;gap:22px}
+  .focus-drawer__footer{padding:14px 24px;border-top:1px solid var(--border);background:#fff;display:flex;flex-wrap:wrap;gap:8px;flex:none}
+
+  /* loading state */
+  .focus-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:48px 24px;text-align:center}
+  .focus-loading__title{font-size:var(--title-6);font-weight:500;color:var(--deep)}
+  .focus-loading__steps{display:grid;gap:8px;width:100%;max-width:320px}
+  .focus-loading__step{display:flex;align-items:center;gap:10px;font-size:var(--body-compact);color:var(--muted);padding:8px 12px;border-radius:var(--radius);background:#fff;border:1px solid var(--border);opacity:0;transform:translateY(4px);transition:opacity 300ms ease-out,transform 300ms ease-out}
+  .focus-loading__step.visible{opacity:1;transform:none}
+  .focus-loading__step .step-dot{width:7px;height:7px;border-radius:50%;background:var(--border);flex:none;transition:background 300ms ease-out}
+  .focus-loading__step.visible .step-dot{background:var(--primary)}
+  .focus-loading__step.done .step-dot{background:var(--success)}
+  .focus-spinner{width:32px;height:32px;border:3px solid var(--blush);border-top-color:var(--primary);border-radius:50%;animation:fdm-spin 700ms linear infinite}
+  @keyframes fdm-spin{to{transform:rotate(360deg)}}
+
+  /* focus view sections */
+  .focus-section{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px}
+  .focus-section .eyebrow{display:block;margin-bottom:6px}
+  .focus-section__heading{font-size:var(--title-6);line-height:var(--lh-title-6);font-weight:500;color:var(--deep);margin:0 0 10px}
+  .focus-section p{font-size:var(--body-s);line-height:var(--lh-body-s);color:var(--text)}
+  .focus-section p+p{margin-top:8px}
+
+  /* kpi grid */
+  .focus-kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .focus-kpi-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
+  .focus-kpi-card .lab{font-size:var(--body-xs);font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:4px}
+  .focus-kpi-card .val{font-family:var(--num);font-size:var(--display-sm);font-weight:600;color:var(--primary);line-height:1;margin-bottom:4px}
+  .focus-kpi-card .mov{font-size:var(--body-xs);font-weight:500;margin-bottom:6px}
+  .focus-kpi-card .mov.down{color:var(--signal)}
+  .focus-kpi-card .mov.up{color:var(--success)}
+  .focus-kpi-card .mov.flat{color:var(--muted)}
+  .focus-kpi-card p{font-size:var(--body-xs);line-height:1.45;color:var(--muted)}
+
+  /* driver cards */
+  .focus-driver-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;display:grid;gap:8px}
+  .focus-driver-card+.focus-driver-card{margin-top:8px}
+  .focus-driver-card__title{font-size:var(--body-s);font-weight:600;color:var(--deep);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .focus-driver-card p{font-size:var(--body-compact);color:var(--text);line-height:1.5}
+  .focus-driver-card__action{font-size:var(--body-xs);color:var(--muted);background:var(--bg);border-radius:var(--radius-sm);padding:8px 10px;border:1px solid var(--border)}
+  .focus-driver-card__action strong{color:var(--deep)}
+
+  /* action cards */
+  .focus-action-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
+  .focus-action-card+.focus-action-card{margin-top:8px}
+  .focus-action-card__header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+  .focus-action-card__title{font-size:var(--body-s);font-weight:600;color:var(--deep)}
+  .focus-action-card p{font-size:var(--body-compact);color:var(--text);line-height:1.5;margin-bottom:6px}
+  .focus-action-card__meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .focus-action-card__owner{font-size:var(--body-xs);color:var(--muted)}
+
+  /* caveat panel */
+  .focus-caveat-panel{background:var(--rose);border:1px solid var(--blush);border-radius:var(--radius);padding:14px 16px}
+  .focus-caveat-panel ul{list-style:none;display:grid;gap:6px}
+  .focus-caveat-panel li{display:flex;gap:8px;align-items:flex-start;font-size:var(--body-compact);color:var(--text);line-height:1.45}
+  .focus-caveat-panel li::before{content:"•";color:var(--signal);flex:none;margin-top:1px}
+
+  /* impact badges */
+  .badge-high{background:#FDEAE8;color:var(--signal);border:1px solid #F8CCC7;font-size:10px;font-weight:600;padding:2px 8px;border-radius:99px;white-space:nowrap}
+  .badge-medium{background:#FDF1E3;color:var(--warning);border:1px solid #F4DDBD;font-size:10px;font-weight:600;padding:2px 8px;border-radius:99px;white-space:nowrap}
+  .badge-analyst{background:var(--rose);color:var(--primary);border:1px solid var(--blush);font-size:10px;font-weight:600;padding:2px 8px;border-radius:99px;white-space:nowrap}
+  .priority-high{color:var(--signal);font-size:var(--body-xs);font-weight:600}
+  .priority-med{color:var(--warning);font-size:var(--body-xs);font-weight:600}
+
   /* evidence drawer */
   .scrim{position:fixed;inset:0;background:rgba(28,20,18,.5);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:.28s;z-index:90}
   .scrim.open{opacity:1;pointer-events:auto}
@@ -473,9 +580,8 @@
   .drawer-close{width:32px;height:32px;border-radius:8px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:#fff;cursor:pointer;display:grid;place-items:center;flex:none;font-size:18px;font-family:inherit}
   .drawer-close:hover{background:rgba(255,255,255,.25)}
   .drawer-body{padding:22px;overflow-y:auto;flex:1}
-  .drawer-body .claim{font-size:var(--title-6);line-height:var(--lh-title-6);font-weight:500;margin:6px 0 12px}
-  .drawer-body .seclab{font-size:var(--body-xs);font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--primary);margin:20px 0 10px}
-  .drawer-foot{padding:16px 22px;border-top:1px solid var(--border);background:#fff;display:flex;flex-wrap:wrap;gap:8px}
+  .drawer-body .claim{font-size:var(--title-5);line-height:var(--lh-title-5);font-weight:500;margin:8px 0 16px;color:var(--deep)}
+  .drawer-body .seclab{font-size:var(--body-s);font-weight:600;color:var(--primary);margin:22px 0 8px;letter-spacing:0;text-transform:none}
 
   .footnote{font-size:var(--body-xs);line-height:var(--lh-body-xs);color:var(--muted);font-style:italic;margin-top:8px}
 
@@ -483,6 +589,53 @@
 
   abbr[title]{text-decoration:underline dotted var(--muted);text-underline-offset:2px;cursor:help}
   [title]{cursor:help}
+
+  /* ---------- focus prompt ---------- */
+  #focusSection{padding:32px 0 0}
+  .focus-block{
+    background:var(--primary);
+    border:2px solid #ff8970;
+    border-radius:var(--radius);
+    padding:40px;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:80px;
+    align-items:center;
+    box-shadow:
+      0 0 0 0 rgba(51,51,51,.04),
+      0 16px 4px 0 rgba(51,51,51,.01),
+      0 12px 3px 0 rgba(51,51,51,.02),
+      0 5px 3px 0 rgba(51,51,51,.08),
+      0 1px 2px 0 rgba(51,51,51,.16),
+      inset 0 -.5px .5px 0 rgba(51,51,51,.08);
+  }
+  .focus-heading{font-size:28px;line-height:1.4;font-weight:500;color:#fff;margin:0;letter-spacing:-.01em;white-space:nowrap}
+  .focus-desc{font-size:var(--body-m);line-height:1.4;color:rgba(255,255,255,.9);margin-bottom:16px}
+  .focus-input-wrap{border:1px solid #ff9f8b;border-radius:8px;padding:4px;background:transparent;max-width:440px}
+  .focus-input-row{display:flex;align-items:center;background:#fff;border-radius:6px;overflow:hidden;gap:8px;padding:4px 4px 4px 12px}
+  .focus-input-container{flex:1;min-width:0;position:relative;display:flex;align-items:center}
+  .focus-input{flex:1;border:none;outline:none;padding:0;font-family:var(--sans);font-size:var(--body-s);font-weight:500;color:var(--deep);background:transparent;min-width:0;line-height:20px;letter-spacing:-.006em;position:relative;z-index:1}
+  .focus-placeholder{position:absolute;left:0;top:50%;transform:translateY(-50%);color:rgba(79,7,2,.5);font-size:var(--body-s);font-weight:500;line-height:20px;letter-spacing:-.006em;pointer-events:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%;transition:opacity 350ms ease-out}
+  .focus-placeholder.fading{opacity:0}
+  .focus-submit{
+    background:var(--primary);
+    color:#fff;
+    border:none;
+    width:32px;height:32px;
+    border-radius:4px;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    flex:none;
+    transition:background 150ms ease-out, transform 100ms ease-out;
+    box-shadow:
+      0 10.88px 3.2px 0 rgba(79,7,2,0),
+      0 7.04px 2.56px 0 rgba(79,7,2,.01),
+      0 3.84px 2.56px 0 rgba(79,7,2,.05),
+      0 1.92px 1.92px 0 rgba(79,7,2,.09),
+      0 .64px .64px 0 rgba(79,7,2,.1);
+  }
+  @media(hover:hover) and (pointer:fine){.focus-submit:hover{background:#e05030}}
+  .focus-submit:active{transform:scale(0.94)}
 
   /* ---------- scroll reveals ---------- */
   .reveal{
@@ -531,7 +684,7 @@
 <header class="top">
   <div class="wrap">
     <div class="top-row">
-      <div class="wordmark"><svg width="92" height="32" viewBox="0 0 92 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="FDM+"><path d="M85.321 0H6.1577C2.7569 0 0 2.75689 0 6.1577V25.8346C0 29.2354 2.7569 31.9923 6.1577 31.9923H85.321C88.7218 31.9923 91.4787 29.2354 91.4787 25.8346V6.1577C91.4787 2.75689 88.7218 0 85.321 0Z" fill="#4F0702"/><path d="M74.1876 25.2617V7.88354H78.5812V25.2617H74.1876ZM67.6953 18.7695V14.3758H85.0735V18.7695H67.6953Z" fill="#FBF4E1"/><path d="M55.113 0H6.1577C2.7569 0 0 2.75689 0 6.1577V25.8346C0 29.2354 2.7569 31.9923 6.1577 31.9923H55.113C58.5138 31.9923 61.2707 29.2354 61.2707 25.8346V6.1577C61.2707 2.75689 58.5138 0 55.113 0Z" fill="#FF6B4C"/><path d="M17.8608 11.1538H10.5088V15.3778H17.3688V18.5218H10.5088V25.2058H6.63281V7.9978H17.8608V11.1538ZM19.9248 25.2058V7.9978H25.7648C31.8768 7.9978 34.6768 10.7938 34.6768 16.3858C34.6768 19.0658 34.0968 21.2058 32.4248 22.8058C30.7608 24.4058 28.5408 25.2058 25.7648 25.2058H19.9248ZM23.5448 11.1538V22.0618H25.4648C27.1448 22.0618 28.4608 21.5578 29.4128 20.5498C30.3728 19.5418 30.8528 18.1698 30.8528 16.4338C30.8528 14.7938 30.3768 13.5058 29.4248 12.5698C28.4808 11.6258 27.1528 11.1538 25.4408 11.1538H23.5448ZM54.8368 25.2058H51.7768V14.9098C51.7768 13.7978 52.2128 13.0418 52.0528 13.5058L47.2528 25.2058H44.8528L40.2368 13.6258C40.1248 13.3138 40.2568 14.4098 40.2568 15.6898V25.2058H36.7648V7.9978H41.1608L45.7929 20.0101L45.8598 19.9396L50.8408 7.9978H54.8368V25.2058Z" fill="white"/></svg></div>
+      <a href="#pulse" class="wordmark"><svg width="92" height="32" viewBox="0 0 92 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="FDM+"><path d="M85.321 0H6.1577C2.7569 0 0 2.75689 0 6.1577V25.8346C0 29.2354 2.7569 31.9923 6.1577 31.9923H85.321C88.7218 31.9923 91.4787 29.2354 91.4787 25.8346V6.1577C91.4787 2.75689 88.7218 0 85.321 0Z" fill="#4F0702"/><path d="M74.1876 25.2617V7.88354H78.5812V25.2617H74.1876ZM67.6953 18.7695V14.3758H85.0735V18.7695H67.6953Z" fill="#FBF4E1"/><path d="M55.113 0H6.1577C2.7569 0 0 2.75689 0 6.1577V25.8346C0 29.2354 2.7569 31.9923 6.1577 31.9923H55.113C58.5138 31.9923 61.2707 29.2354 61.2707 25.8346V6.1577C61.2707 2.75689 58.5138 0 55.113 0Z" fill="#FF6B4C"/><path d="M17.8608 11.1538H10.5088V15.3778H17.3688V18.5218H10.5088V25.2058H6.63281V7.9978H17.8608V11.1538ZM19.9248 25.2058V7.9978H25.7648C31.8768 7.9978 34.6768 10.7938 34.6768 16.3858C34.6768 19.0658 34.0968 21.2058 32.4248 22.8058C30.7608 24.4058 28.5408 25.2058 25.7648 25.2058H19.9248ZM23.5448 11.1538V22.0618H25.4648C27.1448 22.0618 28.4608 21.5578 29.4128 20.5498C30.3728 19.5418 30.8528 18.1698 30.8528 16.4338C30.8528 14.7938 30.3768 13.5058 29.4248 12.5698C28.4808 11.6258 27.1528 11.1538 25.4408 11.1538H23.5448ZM54.8368 25.2058H51.7768V14.9098C51.7768 13.7978 52.2128 13.0418 52.0528 13.5058L47.2528 25.2058H44.8528L40.2368 13.6258C40.1248 13.3138 40.2568 14.4098 40.2568 15.6898V25.2058H36.7648V7.9978H41.1608L45.7929 20.0101L45.8598 19.9396L50.8408 7.9978H54.8368V25.2058Z" fill="white"/></svg></a>
       <nav class="main" aria-label="Primary">
         <a href="#pulse">Live pulse</a>
         <a href="#position">O2 position</a>
@@ -605,6 +758,26 @@
 </section>
 
 <div class="wrap">
+
+<!-- ============ FOCUS PROMPT ============ -->
+<div id="focusSection">
+  <div class="focus-block">
+    <h2 class="focus-heading">What are you focused on this week?</h2>
+    <div>
+      <p class="focus-desc">FDM+ will generate a focused market view using the latest ranking, pricing, promotion, retailer, affiliate and panel data.</p>
+      <div class="focus-input-wrap">
+        <div class="focus-input-row">
+          <div class="focus-input-container">
+            <input type="text" class="focus-input" id="focusInput" autocomplete="off">
+            <span class="focus-placeholder" id="focusPlaceholder">How exposed are we on iPhone 17 Pro Max?</span>
+          </div>
+          <button class="focus-submit" id="focusSubmit" aria-label="Submit focus question">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ============ PRIORITY SIGNAL SUMMARY CARDS ============ -->
 <section id="summary">
@@ -774,9 +947,14 @@
   </div>
 
   <div class="insight analysis" style="margin-top:22px">
-    <span class="k">FDM+ Analysis</span>
+  <div class="analysis-lhs">
+    <img src="images/plusicon.png" alt="FDM+" class="analysis-icon">
+    <span class="k">FDM+<br>Analysis</span>
+  </div>
+  <div class="analysis-rhs">
     <p>O2's top-rank visibility is being driven by a concentrated set of devices rather than broad strength across the full handset range. Galaxy S26 256GB is the strongest current #1 driver, supported by selected iPhone and premium Samsung devices including iPhone 16 128GB, Galaxy S26 Ultra 256GB, iPhone 17 256GB and iPhone 17e 256GB.</p>
     <p>O2's current visibility story is therefore not purely Apple-led. Samsung devices, particularly Galaxy S26 and Galaxy S26 Ultra variants, are playing a central role in O2's strongest ranked positions.</p>
+  </div>
   </div>
 
   <div class="grid cols-2" style="margin-top:14px">
@@ -837,9 +1015,14 @@
   </div>
 
   <div class="insight analysis" style="margin-top:22px">
-    <span class="k">FDM+ Analysis</span>
+  <div class="analysis-lhs">
+    <img src="images/plusicon.png" alt="FDM+" class="analysis-icon">
+    <span class="k">FDM+<br>Analysis</span>
+  </div>
+  <div class="analysis-rhs">
     <p>O2 has a smaller listing footprint than Vodafone, Three and iD Mobile, but it matches Three for the highest #1 rank share at 25.3%. O2's position is therefore best understood as a visibility-efficiency story rather than a broad-distribution story.</p>
     <p>In the current view, O2 has 15.6% listing share, 25.3% #1 rank share and 17.0% Top 3 rank share. The gap between O2's listing share and #1 rank share shows that O2 is converting selective presence into high-ranking visibility.</p>
+  </div>
   </div>
 
   <div class="grid cols-2" style="margin-top:14px">
@@ -898,9 +1081,14 @@
 
 
   <div class="insight analysis" style="margin-top:22px;margin-bottom:22px">
-    <span class="k">FDM+ Analysis</span>
+  <div class="analysis-lhs">
+    <img src="images/plusicon.png" alt="FDM+" class="analysis-icon">
+    <span class="k">FDM+<br>Analysis</span>
+  </div>
+  <div class="analysis-rhs">
     <p>O2's channel position is uneven. It is strongest in specialist and direct channels, particularly MobilePhonesDirect, Buymobiles, Samsung and Affordable Mobiles. In the current captured view, O2 appears in 7 of 9 tracked retailers, giving it 77.8% retailer coverage.</p>
     <p>The main areas requiring validation are Fonehouse and Carphone Warehouse, where O2 shows no captured ranking rows in the selected view. O2 is also weak in parts of the comparison and affiliate environment, including Money Saving Expert and MoneySuperMarket.</p>
+  </div>
   </div>
 
   <div class="grid cols-2">
@@ -985,9 +1173,14 @@
   </div><!-- end hidden supporting context + evidence -->
 
   <div class="insight analysis" style="margin-bottom:22px">
-    <span class="k">FDM+ Analysis</span>
+  <div class="analysis-lhs">
+    <img src="images/plusicon.png" alt="FDM+" class="analysis-icon">
+    <span class="k">FDM+<br>Analysis</span>
+  </div>
+  <div class="analysis-rhs">
     <p>O2's latest ranked visibility is heavily promotion-supported. Using the current promotion classification, 92.5% of O2's captured listings include promotion detail, extra-data promotion or promoted-deal tagging.</p>
     <p>Promotion-supported visibility also increased from 86.8% to 92.5% versus the previous capture, a movement of +5.7pp. The promotion feed shows active movement across Apple, Samsung, Google and SIMO offers, including O2 refreshing Apple promotions on iPhone 17 Pro Max 256GB. The same evidence also shows multiple promotion mechanics in the market, including airtime savings, extra data, half-price periods, device discounts, cashback, gifts, Clubcard value and SIMO price promotions.</p>
+  </div>
   </div>
 
   <div class="grid cols-2" style="margin-bottom:22px">
@@ -1055,9 +1248,14 @@
   </div>
 
   <div class="insight analysis" style="margin-bottom:22px">
-    <span class="k">FDM+ Analysis</span>
+  <div class="analysis-lhs">
+    <img src="images/plusicon.png" alt="FDM+" class="analysis-icon">
+    <span class="k">FDM+<br>Analysis</span>
+  </div>
+  <div class="analysis-rhs">
     <p>Flagship Apple remains the clearest value-exposure area for O2. Current pricing evidence shows Three as the most competitive provider on iPhone 17 Pro Max, despite price decreases from O2 and EE. O2 has refreshed Apple promotions, but Three remains the key benchmark on this device.</p>
     <p>The wider pricing evidence also shows that value competition is not limited to handsets. In SIMO, Sky launched an "Unltd for £20" promotion, while Tesco matched Sky's lead unlimited pricing in the 12-month+ SIMO comparison.</p>
+  </div>
   </div>
 
   <div class="grid cols-2" style="margin-bottom:22px">
@@ -1117,9 +1315,14 @@
   </div>
 
   <div class="insight analysis" style="margin-bottom:22px">
-    <span class="k">FDM+ Analysis</span>
+  <div class="analysis-lhs">
+    <img src="images/plusicon.png" alt="FDM+" class="analysis-icon">
+    <span class="k">FDM+<br>Analysis</span>
+  </div>
+  <div class="analysis-rhs">
     <p>O2 is under-featured in affiliate and newsletter visibility compared with its stronger specialist/direct ranking performance. O2 has 23% <abbr title="Share of Voice — O2's percentage of featured plans across the newsletter or affiliate source">SOV</abbr> in the broader newsletter cut and 30% <abbr title="Share of Voice — O2's percentage of featured plans across the newsletter or affiliate source">SOV</abbr> in the MPD / Buymobiles / Affordable Mobiles cut, with only three O2 plans featured in each view.</p>
     <p>The broader cut shows O2 down 39pp <abbr title="Week on Week — change versus the equivalent period in the previous week">WoW</abbr>, while the narrower cut shows O2 down 50pp <abbr title="Week on Week — change versus the equivalent period in the previous week">WoW</abbr>. Source-level evidence shows O2 appearing in Buymobiles, but not in several other newsletter sources, including Fonehouse, MPD, Money Saving Expert and MoneySuperMarket.</p>
+  </div>
   </div>
 
   <div class="grid cols-2" style="margin-bottom:22px">
@@ -1629,7 +1832,6 @@
     <button class="drawer-close" id="drawerClose" aria-label="Close evidence drawer">×</button>
   </div>
   <div class="drawer-body">
-    <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="badge b-ai">AI draft</span><span class="badge b-evidence">Evidence attached</span><span class="badge b-review">Analyst review required</span></div>
     <div class="seclab">Claim</div>
     <p class="claim">O2 is converting selective presence into strong #1 visibility.</p>
     <div class="seclab">Evidence summary</div>
@@ -1643,21 +1845,323 @@
       <div class="kv"><span class="k">Apparent gaps</span><span class="v">Fonehouse, Carphone Warehouse</span></div>
     </div>
     <div class="seclab">Caveats</div>
-    <ul class="list-box cannot" style="border:1px solid var(--border);border-top:3px solid var(--signal)">
-      <li>This is market visibility data, not confirmed sales performance.</li>
-      <li>Promotion presence does not prove promotion causality.</li>
-      <li>Retailer absence in captured data requires validation.</li>
-      <li>Price comparisons should be matched by device, storage, data, tenure and upfront cost.</li>
-      <li>Event-based sources update only when new source material is received.</li>
-    </ul>
+    <div class="insight caveat">
+      <ul style="list-style:none;display:grid;gap:8px">
+        <li style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--signal);flex:none;margin-top:1px">•</span>This is market visibility data, not confirmed sales performance.</li>
+        <li style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--signal);flex:none;margin-top:1px">•</span>Promotion presence does not prove promotion causality.</li>
+        <li style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--signal);flex:none;margin-top:1px">•</span>Retailer absence in captured data requires validation.</li>
+        <li style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--signal);flex:none;margin-top:1px">•</span>Price comparisons should be matched by device, storage, data, tenure and upfront cost.</li>
+        <li style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--signal);flex:none;margin-top:1px">•</span>Event-based sources update only when new source material is received.</li>
+      </ul>
+    </div>
   </div>
-  <div class="drawer-foot">
-    <button class="btn sm primary">Approve insight</button>
-    <button class="btn sm">Edit wording</button>
-    <button class="btn sm">Save to briefing</button>
-    <button class="btn sm">Download evidence</button>
-    <button class="btn sm">Open source data</button>
+</aside>
+
+<!-- ============ FOCUS DRAWER ============ -->
+<div class="focus-drawer-backdrop" id="focusDrawerBackdrop" aria-hidden="true"></div>
+
+<aside class="focus-drawer" id="focusDrawer" role="dialog" aria-modal="true" aria-labelledby="focusDrawerTitle" aria-hidden="true">
+
+  <div class="focus-drawer__header" style="position:relative">
+    <span class="eyebrow">Generated focus view</span>
+    <h2 class="focus-drawer__title" id="focusDrawerTitle">O2 market share in the North of England</h2>
+    <p class="focus-drawer__subtitle">Generated from the latest regional share, ranking visibility, pricing, promotion, retailer and affiliate signals.</p>
+    <div class="focus-drawer__chips">
+      <span class="focus-chip">Region: North of England</span>
+      <span class="focus-chip">Customer: O2 / VMO2</span>
+      <span class="focus-chip">Scope: PAYM + SIMO</span>
+      <span class="focus-chip">Latest capture: 18 May 2026</span>
+      <span class="focus-chip">Regional model: Updated today</span>
+      <span class="focus-chip">Confidence: Medium</span>
+      <span class="focus-chip hi">AI draft · review required</span>
+    </div>
+    <button class="focus-drawer__close" id="focusDrawerClose" aria-label="Close focus view">×</button>
   </div>
+
+  <!-- Loading state -->
+  <div class="focus-drawer__body focus-loading" id="focusLoading">
+    <div class="focus-spinner"></div>
+    <div class="focus-loading__title">Building your focus view</div>
+    <div class="focus-loading__steps" id="focusLoadingSteps">
+      <div class="focus-loading__step"><span class="step-dot"></span>Reading latest regional share signals</div>
+      <div class="focus-loading__step"><span class="step-dot"></span>Checking O2 ranking visibility</div>
+      <div class="focus-loading__step"><span class="step-dot"></span>Comparing competitor pricing</div>
+      <div class="focus-loading__step"><span class="step-dot"></span>Reviewing promotion support</div>
+      <div class="focus-loading__step"><span class="step-dot"></span>Scanning affiliate and newsletter visibility</div>
+      <div class="focus-loading__step"><span class="step-dot"></span>Preparing recommended actions</div>
+    </div>
+  </div>
+
+  <!-- Focus view content -->
+  <div class="focus-drawer__body focus-view" id="focusView" style="display:none">
+
+    <!-- Section 1: Short answer -->
+    <div class="focus-section">
+      <span class="eyebrow">Short answer</span>
+      <h3 class="focus-section__heading">O2's northern market-share risk appears concentrated in price-sensitive and affiliate-led channels, not in all handset visibility.</h3>
+      <p>O2's estimated share in the North of England is currently <strong>18.4%</strong>, down <strong>1.1pp</strong> versus the previous 7-day view and <strong>1.7pp below</strong> its national benchmark. The pressure is most visible in the <strong>North East</strong> and <strong>Yorkshire &amp; Humber</strong>, where value-led competitors are gaining share faster than O2.</p>
+      <p>This does not mean O2 is weak across the board. O2 is still converting selective presence into strong ranked visibility nationally, with <strong>15.6% listing share</strong> and <strong>25.3% #1 rank share</strong> in the latest ranking capture. The issue is that this strength is not translating evenly into northern market share, particularly in comparison-led, affiliate-led and price-sensitive environments.</p>
+    </div>
+
+    <!-- Section 2: KPI grid -->
+    <div>
+      <span class="eyebrow" style="display:block;margin-bottom:10px">Key numbers</span>
+      <div class="focus-kpi-grid">
+        <div class="focus-kpi-card">
+          <div class="lab">North market share</div>
+          <div class="val">18.4%</div>
+          <div class="mov down">↓ 1.1pp vs previous 7 days</div>
+          <p>O2's estimated regional market share is below its national benchmark.</p>
+        </div>
+        <div class="focus-kpi-card">
+          <div class="lab">National benchmark</div>
+          <div class="val">20.1%</div>
+          <div class="mov flat">Stable</div>
+          <p>O2 is under-indexing in the North by <strong>1.7pp</strong> versus the national market-share benchmark.</p>
+        </div>
+        <div class="focus-kpi-card">
+          <div class="lab">North visibility proxy</div>
+          <div class="val" style="font-size:var(--display-sm)">19.6%</div>
+          <div class="mov down">↓ 0.8pp</div>
+          <p>O2's northern #1 visibility proxy is below its overall current #1 rank share of <strong>25.3%</strong>.</p>
+        </div>
+        <div class="focus-kpi-card">
+          <div class="lab">Promotion-supported listings</div>
+          <div class="val">92.5%</div>
+          <div class="mov up">↑ 5.7pp</div>
+          <p>O2's visibility is highly promotion-supported, but promotion strength is not fully offsetting regional price pressure.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Regional breakdown -->
+    <div class="focus-section">
+      <span class="eyebrow">Regional breakdown</span>
+      <h3 class="focus-section__heading">Where is the northern share pressure strongest?</h3>
+      <div class="table-wrap" style="margin-bottom:12px">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Region</th>
+                <th>O2 estimated share</th>
+                <th>7-day movement</th>
+                <th>Main pressure</th>
+                <th>Read</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><b>North West</b></td><td><b>18.9%</b></td><td style="color:var(--signal);font-weight:600">↓ 0.7pp</td><td>Three on flagship Apple</td><td><span class="read">Softening, but less severe</span></td></tr>
+              <tr><td><b>Yorkshire &amp; Humber</b></td><td><b>17.6%</b></td><td style="color:var(--signal);font-weight:600">↓ 1.4pp</td><td>iD Mobile / SIMO value</td><td><span class="read">Price-sensitive pressure</span></td></tr>
+              <tr style="background:#FFE1DB"><td><b>North East</b></td><td><b>16.8%</b></td><td style="color:var(--signal);font-weight:600">↓ 1.9pp</td><td>Three + affiliate weakness</td><td><span class="read">Highest risk area</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p>The issue is not evenly spread across the North. The North West is softer but still relatively resilient. The sharper risk is in <strong>North East</strong> and <strong>Yorkshire &amp; Humber</strong>, where lower-cost and value-led competitors appear to be pulling demand away from O2.</p>
+      <p>The pattern suggests a <strong>value and visibility problem</strong>, not simply a handset availability problem.</p>
+    </div>
+
+    <!-- Section 4: Main insight (FDM+ Analysis) -->
+    <div class="insight analysis">
+      <div class="analysis-lhs">
+        <img src="images/plusicon.png" alt="FDM+" class="analysis-icon">
+        <span class="k">FDM+<br>Analysis</span>
+      </div>
+      <div class="analysis-rhs">
+        <p><strong style="color:#FF8970">O2 is visible, but not converting enough northern demand in value-sensitive channels.</strong></p>
+        <p>O2 performs well in selected ranked environments, especially where it is ranged through stronger specialist and direct channels. Nationally, O2 has a smaller listing footprint than Vodafone, Three and iD Mobile, but it matches Three for the highest #1 rank share at <strong>25.3%</strong>.</p>
+        <p>The northern concern is that high-ranked visibility is not translating evenly into regional share. O2's affiliate visibility is also weak in the latest newsletter cuts, with <strong>23% SOV</strong> in the broader newsletter cut and <strong>30% SOV</strong> in the narrower cut, with only three O2 plans featured.</p>
+      </div>
+    </div>
+
+    <!-- Section 5: Interpretation -->
+    <div class="focus-section">
+      <span class="eyebrow">Interpretation</span>
+      <h3 class="focus-section__heading">The northern market-share issue looks like a combination of price pressure, channel visibility and promotion dependency.</h3>
+      <p>Three is the most important immediate threat on flagship Apple. Current pricing evidence shows Three as the most competitive provider on iPhone 17 Pro Max despite price decreases from O2 and EE. That matters because flagship Apple is a visible comparison point, and northern share pressure appears strongest where customers are more price-sensitive.</p>
+      <p>O2 also has a channel issue. O2 is strong in selected specialist and direct channels, but weaker in comparison and affiliate environments. Fonehouse and Carphone Warehouse show no O2 rows in the current captured ranking view, while Money Saving Expert and MoneySuperMarket are weak or SIMO/value-led environments for O2.</p>
+      <p>The promotion story is more nuanced. O2 has high promotion-supported visibility at <strong>92.5%</strong>, but that does not mean the promotions are strong enough to close regional value gaps.</p>
+    </div>
+
+    <!-- Section 6: Driver cards -->
+    <div>
+      <span class="eyebrow" style="display:block;margin-bottom:10px">Likely drivers</span>
+      <h3 class="focus-section__heading" style="margin-bottom:12px">What is likely driving the pressure?</h3>
+
+      <div class="focus-driver-card">
+        <div class="focus-driver-card__title">Flagship Apple price pressure <span class="badge-high">High impact</span></div>
+        <p>Three is the key competitor on iPhone 17 Pro Max. O2 has refreshed Apple promotions, but Three remains the pricing benchmark in the current evidence. This is likely to matter in northern regions where value sensitivity appears higher.</p>
+        <div class="focus-driver-card__action"><strong>Action:</strong> Run a matched comparison for iPhone 17 Pro Max across O2, Three, EE, Vodafone and iD Mobile using device storage, data allowance, upfront cost, MRC, TCO and promotion value.</div>
+      </div>
+
+      <div class="focus-driver-card">
+        <div class="focus-driver-card__title">Affiliate and newsletter under-exposure <span class="badge-high">High impact</span></div>
+        <p>O2 is under-featured in the latest affiliate/newsletter cuts. In the broader newsletter view, O2 has <strong>23% SOV</strong>, down <strong>39pp WoW</strong>. In the narrower MPD / Buymobiles / Affordable Mobiles cut, O2 has <strong>30% SOV</strong>, down <strong>50pp WoW</strong>.</p>
+        <div class="focus-driver-card__action"><strong>Action:</strong> Prioritise O2 placement in affiliate/newsletter channels for northern-facing campaigns, especially for iPhone 17, iPhone 17 Pro Max, Galaxy S26 and Galaxy S26 Ultra.</div>
+      </div>
+
+      <div class="focus-driver-card">
+        <div class="focus-driver-card__title">SIMO value pressure <span class="badge-medium">Medium impact</span></div>
+        <p>Sky's <strong>"Unltd for £20"</strong> SIMO promotion and Tesco's matching unlimited pricing create a clear value benchmark outside handset contracts. These offers can pull price-sensitive customers away from O2.</p>
+        <div class="focus-driver-card__action"><strong>Action:</strong> Add SIMO unlimited pricing to the North watchlist and compare O2 against Sky, Tesco, iD Mobile, SMARTY and VOXI.</div>
+      </div>
+
+      <div class="focus-driver-card">
+        <div class="focus-driver-card__title">O2's strongest visibility is selective <span class="badge-medium">Medium impact</span></div>
+        <p>O2 is over-indexing in #1 rank share nationally, but that strength is concentrated. The strongest device drivers include Galaxy S26 256GB, iPhone 16 128GB, Galaxy S26 Ultra 256GB, iPhone 17 256GB and iPhone 17e 256GB.</p>
+        <div class="focus-driver-card__action"><strong>Action:</strong> Focus northern recovery activity around devices where O2 already has strong ranked visibility, rather than spreading promotional effort evenly across the full handset range.</div>
+      </div>
+    </div>
+
+    <!-- Section 7: Recommended actions -->
+    <div>
+      <span class="eyebrow" style="display:block;margin-bottom:6px">Recommended action</span>
+      <h3 class="focus-section__heading" style="margin-bottom:12px">Defend premium visibility, then fix value-led discovery.</h3>
+
+      <div class="focus-action-card">
+        <div class="focus-action-card__header">
+          <div class="focus-action-card__title">1. Put iPhone 17 Pro Max on a northern price watchlist</div>
+          <span class="badge-high">High</span>
+        </div>
+        <p>Track O2 versus Three on iPhone 17 Pro Max using a matched comparison. Include upfront cost, monthly cost, TCO, data allowance, promotion value and rank position.</p>
+        <div class="focus-action-card__meta">
+          <span class="focus-action-card__owner">Owner: Commercial pricing / trading</span>
+        </div>
+      </div>
+
+      <div class="focus-action-card">
+        <div class="focus-action-card__header">
+          <div class="focus-action-card__title">2. Increase O2 presence in affiliate and newsletter channels</div>
+          <span class="badge-high">High</span>
+        </div>
+        <p>O2's affiliate SOV is weak relative to its specialist/direct ranking performance. Prioritise MPD, Buymobiles, MoneySuperMarket and Money Saving Expert for northern-facing deal visibility.</p>
+        <div class="focus-action-card__meta">
+          <span class="focus-action-card__owner">Owner: Partner / affiliate channel</span>
+        </div>
+      </div>
+
+      <div class="focus-action-card">
+        <div class="focus-action-card__header">
+          <div class="focus-action-card__title">3. Use Galaxy S26 as a defensive strength</div>
+          <span class="badge-medium">Medium</span>
+        </div>
+        <p>Galaxy S26 256GB is the strongest current O2 #1 visibility driver. Use this as a northern defensive device where O2 already has credible ranked strength.</p>
+        <div class="focus-action-card__meta">
+          <span class="focus-action-card__owner">Owner: Device trading</span>
+        </div>
+      </div>
+
+      <div class="focus-action-card">
+        <div class="focus-action-card__header">
+          <div class="focus-action-card__title">4. Validate retailer gaps before taking commercial action</div>
+          <span class="badge-medium">Medium</span>
+        </div>
+        <p>Fonehouse and Carphone Warehouse show no O2 rows in the captured ranking view. Confirm whether this is a source limitation, range decision or true channel gap before escalating.</p>
+        <div class="focus-action-card__meta">
+          <span class="focus-action-card__owner">Owner: Data / channel analyst</span>
+        </div>
+      </div>
+
+      <div class="focus-action-card">
+        <div class="focus-action-card__header">
+          <div class="focus-action-card__title">5. Check whether promotions are driving share or only visibility</div>
+          <span class="badge-high">High</span>
+        </div>
+        <p>O2's latest visibility is highly promotion-supported, but market-share pressure remains. Test whether current promotions are translating into regional conversion, not just rank position.</p>
+        <div class="focus-action-card__meta">
+          <span class="focus-action-card__owner">Owner: Insight / analyst</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 8: Evidence used -->
+    <div class="focus-section">
+      <span class="eyebrow">Evidence</span>
+      <h3 class="focus-section__heading">Evidence used in this focus view</h3>
+      <div class="table-wrap">
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Evidence source</th><th>What it contributes</th><th>Relevance to northern concern</th></tr></thead>
+            <tbody>
+              <tr><td><b>Regional share model</b></td><td>O2 estimated North share, sub-region movement, competitor gains</td><td><span class="read">Directly answers the regional share concern</span></td></tr>
+              <tr><td><b>Ranking feed</b></td><td>Listing share, #1 rank share, Top 3 share, retailer visibility</td><td><span class="read">Shows whether O2 is visible enough to support share</span></td></tr>
+              <tr><td><b>Pricing feed</b></td><td>iPhone 17 Pro Max, SIMO unlimited and competitor value pressure</td><td><span class="read">Shows where O2 may be exposed on value</span></td></tr>
+              <tr><td><b>Promotion feed</b></td><td>Promotion-supported listings and offer mechanics</td><td><span class="read">Shows whether O2's visibility depends on active promotions</span></td></tr>
+              <tr><td><b>Retailer/channel feed</b></td><td>Specialist, direct, affiliate and comparison visibility</td><td><span class="read">Shows where O2 is strong or absent</span></td></tr>
+              <tr><td><b>Newsletter feed</b></td><td>O2 SOV and featured-plan presence</td><td><span class="read">Shows partner communication and deal discovery weakness</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 9: Evidence highlights -->
+    <div>
+      <span class="eyebrow" style="display:block;margin-bottom:10px">Evidence highlights</span>
+      <div class="focus-kpi-grid">
+        <div class="focus-kpi-card">
+          <div class="lab" style="text-transform:none;letter-spacing:0;font-size:var(--body-compact);font-weight:600;color:var(--deep);margin-bottom:6px">O2 is strong nationally in #1 visibility</div>
+          <p>O2 has <strong>15.6% listing share</strong> and <strong>25.3% #1 rank share</strong>, showing strong visibility efficiency in the current ranking capture.</p>
+        </div>
+        <div class="focus-kpi-card">
+          <div class="lab" style="text-transform:none;letter-spacing:0;font-size:var(--body-compact);font-weight:600;color:var(--deep);margin-bottom:6px">O2 is weak in affiliate/newsletter visibility</div>
+          <p>O2 has <strong>23% SOV</strong> in the broader newsletter cut and <strong>30% SOV</strong> in the narrower cut, with only three O2 plans featured.</p>
+        </div>
+        <div class="focus-kpi-card">
+          <div class="lab" style="text-transform:none;letter-spacing:0;font-size:var(--body-compact);font-weight:600;color:var(--deep);margin-bottom:6px">Three is the immediate premium-device threat</div>
+          <p>Current pricing evidence identifies Three as the most competitive provider on iPhone 17 Pro Max, despite price decreases from O2 and EE.</p>
+        </div>
+        <div class="focus-kpi-card">
+          <div class="lab" style="text-transform:none;letter-spacing:0;font-size:var(--body-compact);font-weight:600;color:var(--deep);margin-bottom:6px">O2's visibility is promotion-supported</div>
+          <p>O2 promotion-supported listings are at <strong>92.5%</strong>, up <strong>5.7pp</strong>. O2's strongest visibility may be linked to active offer mechanics.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 10: Watchlist -->
+    <div class="focus-section">
+      <span class="eyebrow">Watchlist</span>
+      <h3 class="focus-section__heading">North of England watchlist</h3>
+      <div class="table-wrap">
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Watch item</th><th>Why it matters</th><th>Trigger</th></tr></thead>
+            <tbody>
+              <tr><td><b>iPhone 17 Pro Max</b></td><td>Three is the price benchmark</td><td><span class="read">O2 TCO gap exceeds £100</span></td></tr>
+              <tr><td><b>Galaxy S26 256GB</b></td><td>Strongest O2 #1 driver</td><td><span class="read">O2 loses #1 rank in key retailer</span></td></tr>
+              <tr><td><b>Affiliate SOV</b></td><td>Weak O2 partner visibility</td><td><span class="read">O2 below 30% SOV</span></td></tr>
+              <tr><td><b>MoneySuperMarket / MSE</b></td><td>Value-led discovery environments</td><td><span class="read">O2 absent or below 5% visibility</span></td></tr>
+              <tr><td><b>SIMO unlimited</b></td><td>£20 unlimited offers create value pressure</td><td><span class="read">O2 exceeds market lead by £3+</span></td></tr>
+              <tr><td><b>Fonehouse / Carphone Warehouse</b></td><td>Apparent O2 absence</td><td><span class="read">O2 remains absent after validation</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 11: Caveats -->
+    <div class="focus-caveat-panel">
+      <span class="eyebrow" style="margin-bottom:8px;display:block">Caveats</span>
+      <ul>
+        <li>Regional market-share figures are based on the regional share model and should be reviewed alongside sales-panel methodology.</li>
+        <li>Ranking visibility does not prove sales performance.</li>
+        <li>Promotion presence does not prove promotion causality.</li>
+        <li>Retailer absence in captured data requires validation.</li>
+        <li>Price comparisons should be matched by device, storage, data allowance, tenure and upfront cost.</li>
+        <li>Newsletter SOV is channel visibility, not confirmed conversion.</li>
+      </ul>
+    </div>
+
+  </div><!-- end focus-view -->
+
+  <div class="focus-drawer__footer" id="focusFooter" style="display:none">
+    <button class="btn primary">Save focus view</button>
+    <button class="btn">Create northern watchlist</button>
+    <button class="btn">Open matched price comparison</button>
+    <button class="btn">Send to analyst review</button>
+  </div>
+
 </aside>
 
 <script>
@@ -1698,6 +2202,168 @@
       c.classList.add('active');
     });
   });
+
+  // ---- Focus prompt ----
+  (function initFocusInput() {
+
+    const focusInput      = document.getElementById('focusInput');
+    const focusSubmit     = document.getElementById('focusSubmit');
+    const focusPlaceholder = document.getElementById('focusPlaceholder');
+    const focusInputWrap  = focusInput.closest('.focus-input-wrap');
+    const focusDrawer     = document.getElementById('focusDrawer');
+    const focusBackdrop   = document.getElementById('focusDrawerBackdrop');
+    const focusCloseBtn   = document.getElementById('focusDrawerClose');
+    const focusLoading    = document.getElementById('focusLoading');
+    const focusView       = document.getElementById('focusView');
+    const focusFooter     = document.getElementById('focusFooter');
+    const loadingSteps    = document.querySelectorAll('#focusLoadingSteps .focus-loading__step');
+    let drawerOpen = false;
+    let focusTrapHandler = null;
+    let previouslyFocused = null;
+
+    // -- placeholder cycling --
+    const focusQuestions = [
+      "How exposed are we on iPhone 17 Pro Max?",
+      "Where is O2 losing visibility this week?",
+      "Are promotions driving our ranking improvement?",
+      "Which retailers should we prioritise?",
+      "I'm concerned about market share in the North of England"
+    ];
+    let focusQIndex = 0;
+
+    function updatePlaceholderVisibility() {
+      focusPlaceholder.style.opacity = focusInput.value ? '0' : '';
+    }
+    focusInput.addEventListener('input', updatePlaceholderVisibility);
+
+    setInterval(() => {
+      if (focusInput.value || document.activeElement === focusInput) return;
+      focusPlaceholder.classList.add('fading');
+      setTimeout(() => {
+        focusQIndex = (focusQIndex + 1) % focusQuestions.length;
+        focusPlaceholder.textContent = focusQuestions[focusQIndex];
+        focusPlaceholder.classList.remove('fading');
+      }, 350);
+    }, 3000);
+
+    // -- validation --
+    function showInputError() {
+      focusInputWrap.classList.add('has-error');
+      let err = focusInputWrap.querySelector('.focus-error-msg');
+      if (!err) {
+        err = document.createElement('p');
+        err.className = 'focus-error-msg';
+        err.textContent = 'Tell FDM+ what you want to focus on this week.';
+        focusInputWrap.appendChild(err);
+      }
+      focusInput.focus();
+    }
+    function clearInputError() {
+      focusInputWrap.classList.remove('has-error');
+    }
+    focusInput.addEventListener('input', clearInputError);
+
+    // -- trigger detection --
+    function isNorthQuery(val) {
+      const v = val.toLowerCase();
+      return v.includes('north') || v.includes('northern') || v.includes('market share') || v.includes('regional share');
+    }
+
+    // -- drawer open/close --
+    function openFocusDrawer(query) {
+      if (!query.trim()) { showInputError(); return; }
+      previouslyFocused = document.activeElement;
+      drawerOpen = true;
+      document.body.style.overflow = 'hidden';
+      focusDrawer.setAttribute('aria-hidden','false');
+      focusBackdrop.classList.add('is-open');
+      focusDrawer.classList.add('is-open');
+      // reset view
+      focusLoading.style.display = 'flex';
+      focusView.style.display = 'none';
+      focusFooter.style.display = 'none';
+      loadingSteps.forEach(s => { s.classList.remove('visible','done'); });
+      showFocusLoading(query);
+      trapFocusInDrawer();
+    }
+
+    function closeFocusDrawer() {
+      drawerOpen = false;
+      document.body.style.overflow = '';
+      focusDrawer.setAttribute('aria-hidden','true');
+      focusBackdrop.classList.remove('is-open');
+      focusDrawer.classList.remove('is-open');
+      releaseFocusTrap();
+      if (previouslyFocused) previouslyFocused.focus();
+    }
+
+    // -- loading sequence --
+    function showFocusLoading(query) {
+      const delays = [0, 130, 260, 400, 540, 680];
+      loadingSteps.forEach((step, i) => {
+        setTimeout(() => {
+          step.classList.add('visible');
+          if (i > 0) loadingSteps[i-1].classList.add('done');
+        }, delays[i]);
+      });
+      const totalDelay = 820;
+      setTimeout(() => {
+        loadingSteps.forEach(s => s.classList.add('done'));
+        setTimeout(() => showNorthMarketShareFocusView(query), 180);
+      }, totalDelay);
+    }
+
+    function showNorthMarketShareFocusView(query) {
+      focusLoading.style.display = 'none';
+      focusView.style.display = 'flex';
+      focusFooter.style.display = 'flex';
+      focusView.scrollTop = 0;
+    }
+
+    // -- focus trap --
+    function trapFocusInDrawer() {
+      const focusable = 'a[href],button:not([disabled]),input,select,textarea,[tabindex]:not([tabindex="-1"])';
+      focusTrapHandler = function(e) {
+        if (e.key !== 'Tab') return;
+        const els = Array.from(focusDrawer.querySelectorAll(focusable)).filter(el => !el.closest('[hidden]') && el.offsetParent !== null);
+        if (!els.length) return;
+        const first = els[0]; const last = els[els.length-1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      };
+      document.addEventListener('keydown', focusTrapHandler);
+      // move focus into drawer
+      const firstFocusable = focusDrawer.querySelector('button,input,[tabindex]');
+      if (firstFocusable) setTimeout(() => firstFocusable.focus(), 50);
+    }
+
+    function releaseFocusTrap() {
+      if (focusTrapHandler) { document.removeEventListener('keydown', focusTrapHandler); focusTrapHandler = null; }
+    }
+
+    // -- event wiring --
+    function handleFocusSubmit() {
+      const val = focusInput.value.trim();
+      if (!val) { showInputError(); return; }
+      if (drawerOpen) {
+        // re-run loading briefly
+        focusLoading.style.display = 'flex';
+        focusView.style.display = 'none';
+        focusFooter.style.display = 'none';
+        loadingSteps.forEach(s => s.classList.remove('visible','done'));
+        showFocusLoading(val);
+      } else {
+        openFocusDrawer(val);
+      }
+    }
+
+    focusSubmit.addEventListener('click', handleFocusSubmit);
+    focusInput.addEventListener('keydown', e => { if (e.key === 'Enter') handleFocusSubmit(); });
+    focusCloseBtn.addEventListener('click', closeFocusDrawer);
+    focusBackdrop.addEventListener('click', closeFocusDrawer);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && drawerOpen) closeFocusDrawer(); });
+
+  })();
 
   // ---- Ask FDM+ prompt chips update the question bubble ----
   const askQ=document.getElementById('askQ');
