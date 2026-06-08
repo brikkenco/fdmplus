@@ -471,6 +471,119 @@
   .focus-error-msg{font-size:var(--body-xs);color:var(--signal);margin-top:6px;display:none}
   .focus-input-wrap.has-error .focus-error-msg{display:block}
 
+  /* ---------- password gate ---------- */
+  .is-hidden{display:none !important}
+
+  .pg{
+    position:fixed;inset:0;z-index:200;
+    background:var(--bg);
+  }
+  /* Logo pinned 80px from top, centred horizontally */
+  .pg__logo{
+    position:absolute;
+    top:80px;left:50%;
+    transform:translateX(-50%);
+    display:flex;align-items:center;justify-content:center;
+  }
+  /* Form centred vertically in the full viewport */
+  .pg__shell{
+    height:100%;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:24px;
+  }
+  .pg__form{
+    width:100%;max-width:411px;
+    display:flex;flex-direction:column;
+    align-items:center;
+    gap:20px;
+  }
+  /* Kill the global :focus-visible outline inside the gate */
+  .pg *:focus-visible{outline:none !important;box-shadow:none !important}
+  .pg__eyebrow{color:var(--primary);margin-bottom:-8px}
+  .pg__heading{
+    font-size:20px;font-weight:500;
+    color:var(--deep);
+    letter-spacing:-.008em;
+    text-align:center;
+    margin:0;
+  }
+  .pg__body{
+    font-size:var(--body-compact);color:var(--muted);
+    text-align:center;line-height:1.5;
+    margin:0;
+  }
+  .pg__field{width:100%;display:flex;flex-direction:column;gap:6px}
+  .pg__label{font-size:var(--body-xs);font-weight:600;color:var(--deep);letter-spacing:.04em;text-transform:uppercase}
+  .pg__input-wrap{
+    display:flex;align-items:center;
+    background:#fff;
+    border-radius:6px;
+    height:48px;
+    padding:4px 4px 4px 12px;
+    gap:4px;
+    box-shadow:
+      inset 0 -1px 1px -.5px rgba(23,23,23,.06),
+      0 0 0 1px rgba(23,23,23,.08),
+      0 1px 1px -.5px rgba(23,23,23,.04),
+      0 3px 3px -1.5px rgba(23,23,23,.04),
+      0 6px 6px -3px rgba(23,23,23,.04),
+      0 10px 10px -5px rgba(23,23,23,.04),
+      0 20px 20px -10px rgba(23,23,23,.04);
+    transition:box-shadow 150ms ease-out;
+  }
+
+  .pg__input{
+    flex:1;min-width:0;
+    border:none;outline:none;
+    background:transparent;
+    font-family:var(--sans);
+    font-size:var(--body-m);
+    font-weight:500;
+    color:rgba(79,7,2,.5);
+    letter-spacing:-.006em;
+    padding:0;
+  }
+  .pg__input:focus{color:var(--deep)}
+  .pg__input::placeholder{color:rgba(79,7,2,.5)}
+  .pg__toggle{
+    background:none;border:none;cursor:pointer;
+    color:var(--muted);
+    font-family:var(--sans);
+    font-size:var(--body-xs);
+    font-weight:600;
+    padding:4px 6px;
+    border-radius:4px;
+    flex:none;
+    display:flex;align-items:center;
+    transition:color 150ms ease-out;
+  }
+  .pg__toggle:hover{color:var(--deep)}
+  .pg__submit{
+    background:var(--primary);
+    color:#fff;
+    border:none;
+    width:36px;height:36px;
+    border-radius:4px;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    flex:none;
+    transition:background 150ms ease-out, transform 100ms ease-out;
+    box-shadow:
+      0 10.88px 3.2px 0 rgba(79,7,2,0),
+      0 7.04px 2.56px 0 rgba(79,7,2,.01),
+      0 3.84px 2.56px 0 rgba(79,7,2,.05),
+      0 1.92px 1.92px 0 rgba(79,7,2,.09),
+      0 .64px .64px 0 rgba(79,7,2,.1);
+  }
+  @media(hover:hover) and (pointer:fine){.pg__submit:hover{background:#e05030}}
+  .pg__submit:active{transform:scale(0.94)}
+  .pg__error{
+    font-size:var(--body-xs);color:var(--signal);
+    margin:0;line-height:1.4;
+  }
+  .pg__caveat{font-size:var(--body-xs);color:var(--muted);text-align:center;margin:0}
+  .pg__footer{font-size:var(--body-xs);color:var(--muted);text-align:center;margin:0}
+
   /* ---------- focus drawer backdrop ---------- */
   .focus-drawer-backdrop{position:fixed;inset:0;background:rgba(28,20,18,.48);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity 280ms ease-out;z-index:100}
   .focus-drawer-backdrop.is-open{opacity:1;pointer-events:auto}
@@ -679,6 +792,39 @@
 </style>
 </head>
 <body>
+
+<!-- ============ PASSWORD GATE ============ -->
+<section id="passwordGate" class="pg" aria-labelledby="pgTitle">
+  <div class="pg__shell">
+
+    <div class="pg__logo" aria-label="FDM+">
+      <svg width="120" height="42" viewBox="0 0 92 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M85.321 0H6.1577C2.7569 0 0 2.75689 0 6.1577V25.8346C0 29.2354 2.7569 31.9923 6.1577 31.9923H85.321C88.7218 31.9923 91.4787 29.2354 91.4787 25.8346V6.1577C91.4787 2.75689 88.7218 0 85.321 0Z" fill="#4F0702"/><path d="M74.1876 25.2617V7.88354H78.5812V25.2617H74.1876ZM67.6953 18.7695V14.3758H85.0735V18.7695H67.6953Z" fill="#FBF4E1"/><path d="M55.113 0H6.1577C2.7569 0 0 2.75689 0 6.1577V25.8346C0 29.2354 2.7569 31.9923 6.1577 31.9923H55.113C58.5138 31.9923 61.2707 29.2354 61.2707 25.8346V6.1577C61.2707 2.75689 58.5138 0 55.113 0Z" fill="#FF6B4C"/><path d="M17.8608 11.1538H10.5088V15.3778H17.3688V18.5218H10.5088V25.2058H6.63281V7.9978H17.8608V11.1538ZM19.9248 25.2058V7.9978H25.7648C31.8768 7.9978 34.6768 10.7938 34.6768 16.3858C34.6768 19.0658 34.0968 21.2058 32.4248 22.8058C30.7608 24.4058 28.5408 25.2058 25.7648 25.2058H19.9248ZM23.5448 11.1538V22.0618H25.4648C27.1448 22.0618 28.4608 21.5578 29.4128 20.5498C30.3728 19.5418 30.8528 18.1698 30.8528 16.4338C30.8528 14.7938 30.3768 13.5058 29.4248 12.5698C28.4808 11.6258 27.1528 11.1538 25.4408 11.1538H23.5448ZM54.8368 25.2058H51.7768V14.9098C51.7768 13.7978 52.2128 13.0418 52.0528 13.5058L47.2528 25.2058H44.8528L40.2368 13.6258C40.1248 13.3138 40.2568 14.4098 40.2568 15.6898V25.2058H36.7648V7.9978H41.1608L45.7929 20.0101L45.8598 19.9396L50.8408 7.9978H54.8368V25.2058Z" fill="white"/></svg>
+    </div>
+
+    <form class="pg__form" id="passwordForm" novalidate>
+      <h1 class="pg__heading" id="pgTitle">Enter access code</h1>
+
+      <div class="pg__field">
+        <label class="pg__label" for="pgInput">Access code</label>
+        <div class="pg__input-wrap" id="pgInputWrap">
+          <input type="password" id="pgInput" name="password" class="pg__input" placeholder="Enter password" autocomplete="current-password" aria-describedby="pgError">
+          <button type="button" class="pg__toggle" id="pgToggle" aria-label="Show password">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+          <button type="submit" class="pg__submit" id="pgSubmit" aria-label="Unlock dashboard">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+        <p class="pg__error" id="pgError" role="alert" hidden></p>
+      </div>
+
+    </form>
+
+  </div>
+</section>
+
+<!-- ============ DASHBOARD ============ -->
+<div id="dashboardApp">
 
 <!-- ============ HEADER ============ -->
 <header class="top">
@@ -2145,6 +2291,8 @@
 
 </aside>
 
+</div><!-- end #dashboardApp -->
+
 <script>
   // ---- Evidence drawer ----
   const scrim = document.getElementById('scrim');
@@ -2383,6 +2531,100 @@
   }, { threshold: 0.3 });
 
   document.querySelectorAll('.ev-panel').forEach(el => evObs.observe(el));
+
+  // ---- Password gate ----
+  (function initPasswordGate() {
+    const ACCESS_PASSWORD = 'FDMPLUS2026';
+    const ACCESS_KEY = 'fdmplus_o2_access';
+
+    const gate        = document.getElementById('passwordGate');
+    const app         = document.getElementById('dashboardApp');
+    const form        = document.getElementById('passwordForm');
+    const input       = document.getElementById('pgInput');
+    const inputWrap   = document.getElementById('pgInputWrap');
+    const errorEl     = document.getElementById('pgError');
+    const toggleBtn   = document.getElementById('pgToggle');
+    const logoutBtn   = document.querySelector('.btn-ask-top');
+
+    function showPasswordGate() {
+      gate.classList.remove('is-hidden');
+      app.classList.add('is-hidden');
+      input.value = '';
+      clearPasswordError();
+      setTimeout(() => input.focus(), 60);
+    }
+
+    function hidePasswordGate() {
+      gate.classList.add('is-hidden');
+      app.classList.remove('is-hidden');
+      // move focus into dashboard, away from hidden gate
+      const firstFocusable = app.querySelector('a,button,[tabindex]');
+      if (firstFocusable) firstFocusable.focus();
+    }
+
+    function grantAccess() {
+      sessionStorage.setItem(ACCESS_KEY, 'granted');
+      hidePasswordGate();
+    }
+
+    function revokeAccess() {
+      sessionStorage.removeItem(ACCESS_KEY);
+      showPasswordGate();
+    }
+
+    function showPasswordError(msg) {
+      errorEl.textContent = msg;
+      errorEl.hidden = false;
+      inputWrap.classList.add('has-error');
+      input.focus();
+    }
+
+    function clearPasswordError() {
+      errorEl.hidden = true;
+      errorEl.textContent = '';
+      inputWrap.classList.remove('has-error');
+    }
+
+    function validatePassword(value) {
+      if (!value) { showPasswordError('Enter your access code to continue.'); return false; }
+      if (value !== ACCESS_PASSWORD) { showPasswordError('Incorrect password. Please check your access code and try again.'); return false; }
+      return true;
+    }
+
+    // Toggle password visibility
+    toggleBtn.addEventListener('click', () => {
+      const showing = input.type === 'text';
+      input.type = showing ? 'password' : 'text';
+      toggleBtn.setAttribute('aria-label', showing ? 'Show password' : 'Hide password');
+      toggleBtn.innerHTML = showing
+        ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>'
+        : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
+    });
+
+    // Form submit
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      clearPasswordError();
+      const val = input.value.trim();
+      if (validatePassword(val)) grantAccess();
+    });
+
+    // Clear error on input
+    input.addEventListener('input', clearPasswordError);
+
+    // Log out button
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', revokeAccess);
+    }
+
+    // On load: check session
+    if (sessionStorage.getItem(ACCESS_KEY) === 'granted') {
+      hidePasswordGate();
+    } else {
+      showPasswordGate();
+    }
+
+  })();
 </script>
 </body>
 </html>
