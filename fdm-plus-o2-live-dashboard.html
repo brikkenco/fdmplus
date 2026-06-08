@@ -478,7 +478,7 @@
   /* ---------- focus drawer ---------- */
   .focus-drawer{
     position:fixed;top:0;right:0;height:100%;
-    width:50vw;max-width:760px;min-width:560px;
+    width:80vw;max-width:1200px;min-width:600px;
     background:var(--bg);
     box-shadow:-4px 0 40px rgba(0,0,0,.18);
     transform:translateX(100%);
@@ -491,7 +491,7 @@
   @media(max-width:640px){.focus-drawer{width:100%;min-width:0}}
 
   .focus-drawer__header{
-    padding:22px 24px 20px;
+    padding:40px 24px 36px;
     background:var(--deep);
     color:#fff;
     flex:none;
@@ -505,7 +505,7 @@
   .focus-drawer__close{position:absolute;top:18px;right:18px;width:32px;height:32px;border-radius:8px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;cursor:pointer;display:grid;place-items:center;font-size:18px;font-family:inherit;transition:background 150ms ease-out}
   .focus-drawer__close:hover{background:rgba(255,255,255,.22)}
 
-  .focus-drawer__body{flex:1;overflow-y:auto;padding:24px;display:flex;flex-direction:column;gap:22px}
+  .focus-drawer__body{flex:1;overflow-y:auto;padding:40px;display:flex;flex-direction:column;gap:44px}
   .focus-drawer__footer{padding:14px 24px;border-top:1px solid var(--border);background:#fff;display:flex;flex-wrap:wrap;gap:8px;flex:none}
 
   /* loading state */
@@ -521,15 +521,15 @@
   @keyframes fdm-spin{to{transform:rotate(360deg)}}
 
   /* focus view sections */
-  .focus-section{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px}
-  .focus-section .eyebrow{display:block;margin-bottom:6px}
-  .focus-section__heading{font-size:var(--title-6);line-height:var(--lh-title-6);font-weight:500;color:var(--deep);margin:0 0 10px}
+  .focus-section{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:36px 28px}
+  .focus-section .eyebrow{display:block;margin-bottom:10px}
+  .focus-section__heading{font-size:var(--title-6);line-height:var(--lh-title-6);font-weight:500;color:var(--deep);margin:0 0 18px}
   .focus-section p{font-size:var(--body-s);line-height:var(--lh-body-s);color:var(--text)}
-  .focus-section p+p{margin-top:8px}
+  .focus-section p+p{margin-top:16px}
 
   /* kpi grid */
-  .focus-kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .focus-kpi-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
+  .focus-kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .focus-kpi-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:28px 20px}
   .focus-kpi-card .lab{font-size:var(--body-xs);font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:4px}
   .focus-kpi-card .val{font-family:var(--num);font-size:var(--display-sm);font-weight:600;color:var(--primary);line-height:1;margin-bottom:4px}
   .focus-kpi-card .mov{font-size:var(--body-xs);font-weight:500;margin-bottom:6px}
@@ -539,16 +539,16 @@
   .focus-kpi-card p{font-size:var(--body-xs);line-height:1.45;color:var(--muted)}
 
   /* driver cards */
-  .focus-driver-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;display:grid;gap:8px}
-  .focus-driver-card+.focus-driver-card{margin-top:8px}
+  .focus-driver-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;display:grid;gap:14px}
+  .focus-driver-card+.focus-driver-card{margin-top:16px}
   .focus-driver-card__title{font-size:var(--body-s);font-weight:600;color:var(--deep);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
   .focus-driver-card p{font-size:var(--body-compact);color:var(--text);line-height:1.5}
   .focus-driver-card__action{font-size:var(--body-xs);color:var(--muted);background:var(--bg);border-radius:var(--radius-sm);padding:8px 10px;border:1px solid var(--border)}
   .focus-driver-card__action strong{color:var(--deep)}
 
   /* action cards */
-  .focus-action-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
-  .focus-action-card+.focus-action-card{margin-top:8px}
+  .focus-action-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px}
+  .focus-action-card+.focus-action-card{margin-top:16px}
   .focus-action-card__header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px;flex-wrap:wrap}
   .focus-action-card__title{font-size:var(--body-s);font-weight:600;color:var(--deep)}
   .focus-action-card p{font-size:var(--body-compact);color:var(--text);line-height:1.5;margin-bottom:6px}
@@ -556,7 +556,7 @@
   .focus-action-card__owner{font-size:var(--body-xs);color:var(--muted)}
 
   /* caveat panel */
-  .focus-caveat-panel{background:var(--rose);border:1px solid var(--blush);border-radius:var(--radius);padding:14px 16px}
+  .focus-caveat-panel{background:var(--rose);border:1px solid var(--blush);border-radius:var(--radius);padding:28px 24px}
   .focus-caveat-panel ul{list-style:none;display:grid;gap:6px}
   .focus-caveat-panel li{display:flex;gap:8px;align-items:flex-start;font-size:var(--body-compact);color:var(--text);line-height:1.45}
   .focus-caveat-panel li::before{content:"•";color:var(--signal);flex:none;margin-top:1px}
@@ -600,7 +600,7 @@
     display:grid;
     grid-template-columns:auto 1fr;
     gap:80px;
-    align-items:center;
+    align-items:start;
     box-shadow:
       0 0 0 0 rgba(51,51,51,.04),
       0 16px 4px 0 rgba(51,51,51,.01),
@@ -609,7 +609,7 @@
       0 1px 2px 0 rgba(51,51,51,.16),
       inset 0 -.5px .5px 0 rgba(51,51,51,.08);
   }
-  .focus-heading{font-size:28px;line-height:1.4;font-weight:500;color:#fff;margin:0;letter-spacing:-.01em;white-space:nowrap}
+  .focus-heading{font-size:28px;line-height:1.4;font-weight:500;color:#fff;margin:0;letter-spacing:-.01em}
   .focus-desc{font-size:var(--body-m);line-height:1.4;color:rgba(255,255,255,.9);margin-bottom:16px}
   .focus-input-wrap{border:1px solid #ff9f8b;border-radius:8px;padding:4px;background:transparent;max-width:440px}
   .focus-input-row{display:flex;align-items:center;background:#fff;border-radius:6px;overflow:hidden;gap:8px;padding:4px 4px 4px 12px}
@@ -730,7 +730,7 @@
       <p class="body">The current story is <strong>selective strength</strong>. O2 appears strongest in specialist and direct channels, but weaker or absent in parts of the comparison and affiliate environment. Its latest captured visibility is also heavily promotion-supported, so FDM+ separates durable ranking strength from short-term promotional uplift.</p>
       <div class="hero-cta">
         <button class="btn primary" onclick="document.getElementById('signals').scrollIntoView()">Review priority signals</button>
-        <button class="btn" onclick="document.getElementById('position').scrollIntoView()">Open O2 position</button>
+        <button class="btn" onclick="document.getElementById('position').scrollIntoView()">View O2 position</button>
         <button class="btn" onclick="document.getElementById('ask').scrollIntoView()">Ask FDM+ why this matters</button>
       </div>
     </div>
@@ -762,7 +762,7 @@
 <!-- ============ FOCUS PROMPT ============ -->
 <div id="focusSection">
   <div class="focus-block">
-    <h2 class="focus-heading">What are you focused on this week?</h2>
+    <h2 class="focus-heading">What are you focused<br>on this week?</h2>
     <div>
       <p class="focus-desc">FDM+ will generate a focused market view using the latest ranking, pricing, promotion, retailer, affiliate and panel data.</p>
       <div class="focus-input-wrap">
@@ -809,7 +809,7 @@
       <div class="ps-value">92.5%</div>
       <h3 class="ctitle">O2 visibility is heavily promotion-supported</h3>
       <p>Using the current promotion classification, 92.5% of O2's latest captured listings include promotion detail, extra-data promotion or promoted-deal tagging.</p>
-      <div class="ps-foot"><button class="link-arrow" onclick="document.getElementById('promotions').scrollIntoView()">Review promotion types<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+      <div class="ps-foot"><button class="link-arrow" onclick="document.getElementById('promotions').scrollIntoView()">View promotion types<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
     </article>
 
     <article class="card ps-card">
@@ -817,7 +817,7 @@
       <div class="ps-value">77.8%</div>
       <h3 class="ctitle">O2 appears in 7 of 9 tracked retailers</h3>
       <p>O2 is visible in most tracked retailers in the latest captured view, but two apparent gaps need validation: Fonehouse and Carphone Warehouse.</p>
-      <div class="ps-foot"><button class="link-arrow" onclick="document.getElementById('retailers').scrollIntoView()">Open retailer radar<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+      <div class="ps-foot"><button class="link-arrow" onclick="document.getElementById('retailers').scrollIntoView()">View retailer radar<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
     </article>
 
     <article class="card ps-card">
@@ -825,7 +825,7 @@
       <div class="ps-value txt">High</div>
       <h3 class="ctitle">Flagship Apple remains a live watch area</h3>
       <p>Three remains a key price threat on iPhone 17 Pro Max. Current pricing evidence shows Three as the most competitive provider on iPhone 17 Pro Max despite price decreases from O2 and EE.</p>
-      <div class="ps-foot"><button class="link-arrow" onclick="document.getElementById('pricing').scrollIntoView()">Open Apple watchlist<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+      <div class="ps-foot"><button class="link-arrow" onclick="document.getElementById('pricing').scrollIntoView()">View pricing data<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
     </article>
 
     <article class="card ps-card">
@@ -833,7 +833,7 @@
       <div class="ps-value txt">23% / 30%</div>
       <h3 class="ctitle">O2 is under-featured in affiliate visibility</h3>
       <p>O2 has 23% <abbr title="Share of Voice — O2's percentage of featured plans across the newsletter or affiliate source">SOV</abbr> across the broader newsletter cut and 30% <abbr title="Share of Voice — O2's percentage of featured plans across the newsletter or affiliate source">SOV</abbr> across the MPD / Buymobiles / Affordable Mobiles cut, with only three O2 plans featured in each view.</p>
-      <div class="ps-foot"><button class="link-arrow" onclick="document.getElementById('newsletter').scrollIntoView()">Open newsletter evidence<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+      <div class="ps-foot"><button class="link-arrow" onclick="document.getElementById('newsletter').scrollIntoView()">View newsletter evidence<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
     </article>
 
   </div>
@@ -1108,7 +1108,6 @@
   <div class="btn-row" style="margin-top:22px">
     <button class="btn">Show strong channels</button>
     <button class="btn">Validate gaps</button>
-    <button class="btn" onclick="document.getElementById('newsletter').scrollIntoView()">Open affiliate visibility</button>
   </div>
   </div><!-- close inner wrap -->
 </section>
@@ -1198,9 +1197,8 @@
   </div>
 
   <div class="btn-row">
-    <button class="btn">Review promotion types</button>
+    <button class="btn">View promotion types</button>
     <button class="btn">Check expiry risk</button>
-    <button class="btn primary" data-drawer>Open promotion evidence</button>
   </div>
   </div><!-- close inner wrap -->
 </section>
@@ -1272,9 +1270,8 @@
   </div>
 
   <div class="btn-row">
-    <button class="btn primary">Open Apple watchlist</button>
+    <button class="btn primary">View pricing data</button>
     <button class="btn">Run matched comparison</button>
-    <button class="btn">View captured rows</button>
   </div>
   </div><!-- close inner wrap -->
 </section>
@@ -1444,7 +1441,7 @@
         <div class="sig-detail-inner">
           <div class="sig-block"><div class="k">Meaning</div><p>This is a selective-channel strength story, not broad market dominance.</p></div>
           <div class="sig-block"><div class="k">Recommended action</div><p>Defend strong channels and validate whether absent retailers are true commercial gaps.</p></div>
-          <div class="sig-status"><button class="link-arrow" onclick="document.getElementById('retailers').scrollIntoView()">Open retailer radar<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+          <div class="sig-status"><button class="link-arrow" onclick="document.getElementById('retailers').scrollIntoView()">View retailer radar<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
         </div>
       </div>
     </article>
@@ -1462,7 +1459,7 @@
         <div class="sig-detail-inner">
           <div class="sig-block"><div class="k">Meaning</div><p>O2's affiliate/newsletter visibility appears weaker than its specialist/direct ranking performance.</p></div>
           <div class="sig-block"><div class="k">Recommended action</div><p>Increase newsletter visibility for priority Apple and Samsung devices.</p></div>
-          <div class="sig-status"><button class="link-arrow" onclick="document.getElementById('newsletter').scrollIntoView()">Open newsletter evidence<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+          <div class="sig-status"><button class="link-arrow" onclick="document.getElementById('newsletter').scrollIntoView()">View newsletter evidence<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
         </div>
       </div>
     </article>
@@ -1865,16 +1862,6 @@
   <div class="focus-drawer__header" style="position:relative">
     <span class="eyebrow">Generated focus view</span>
     <h2 class="focus-drawer__title" id="focusDrawerTitle">O2 market share in the North of England</h2>
-    <p class="focus-drawer__subtitle">Generated from the latest regional share, ranking visibility, pricing, promotion, retailer and affiliate signals.</p>
-    <div class="focus-drawer__chips">
-      <span class="focus-chip">Region: North of England</span>
-      <span class="focus-chip">Customer: O2 / VMO2</span>
-      <span class="focus-chip">Scope: PAYM + SIMO</span>
-      <span class="focus-chip">Latest capture: 18 May 2026</span>
-      <span class="focus-chip">Regional model: Updated today</span>
-      <span class="focus-chip">Confidence: Medium</span>
-      <span class="focus-chip hi">AI draft · review required</span>
-    </div>
     <button class="focus-drawer__close" id="focusDrawerClose" aria-label="Close focus view">×</button>
   </div>
 
@@ -1965,7 +1952,7 @@
     <!-- Section 4: Main insight (FDM+ Analysis) -->
     <div class="insight analysis">
       <div class="analysis-lhs">
-        <img src="images/plusicon.png" alt="FDM+" class="analysis-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="analysis-icon" style="border-radius:6px;background:#FF6B4C;flex:none"><rect width="24" height="24" rx="6" fill="#FF6B4C"/><path d="M12 7v10M7 12h10" stroke="#4F0702" stroke-width="2.2" stroke-linecap="round"/></svg>
         <span class="k">FDM+<br>Analysis</span>
       </div>
       <div class="analysis-rhs">
@@ -2155,12 +2142,6 @@
 
   </div><!-- end focus-view -->
 
-  <div class="focus-drawer__footer" id="focusFooter" style="display:none">
-    <button class="btn primary">Save focus view</button>
-    <button class="btn">Create northern watchlist</button>
-    <button class="btn">Open matched price comparison</button>
-    <button class="btn">Send to analyst review</button>
-  </div>
 
 </aside>
 
@@ -2215,7 +2196,6 @@
     const focusCloseBtn   = document.getElementById('focusDrawerClose');
     const focusLoading    = document.getElementById('focusLoading');
     const focusView       = document.getElementById('focusView');
-    const focusFooter     = document.getElementById('focusFooter');
     const loadingSteps    = document.querySelectorAll('#focusLoadingSteps .focus-loading__step');
     let drawerOpen = false;
     let focusTrapHandler = null;
@@ -2281,7 +2261,6 @@
       // reset view
       focusLoading.style.display = 'flex';
       focusView.style.display = 'none';
-      focusFooter.style.display = 'none';
       loadingSteps.forEach(s => { s.classList.remove('visible','done'); });
       showFocusLoading(query);
       trapFocusInDrawer();
@@ -2316,7 +2295,6 @@
     function showNorthMarketShareFocusView(query) {
       focusLoading.style.display = 'none';
       focusView.style.display = 'flex';
-      focusFooter.style.display = 'flex';
       focusView.scrollTop = 0;
     }
 
@@ -2349,7 +2327,6 @@
         // re-run loading briefly
         focusLoading.style.display = 'flex';
         focusView.style.display = 'none';
-        focusFooter.style.display = 'none';
         loadingSteps.forEach(s => s.classList.remove('visible','done'));
         showFocusLoading(val);
       } else {
