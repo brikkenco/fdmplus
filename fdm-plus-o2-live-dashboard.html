@@ -593,14 +593,14 @@
     position:fixed;top:0;right:0;height:100%;
     width:80vw;max-width:1200px;min-width:600px;
     background:var(--bg);
-    box-shadow:-4px 0 40px rgba(0,0,0,.18);
+    box-shadow:none;
     transform:translateX(100%);
-    transition:transform 340ms var(--ease-drawer);
+    transition:transform 340ms var(--ease-drawer), box-shadow 340ms var(--ease-drawer);
     z-index:101;
     display:flex;flex-direction:column;
     overflow:hidden;
   }
-  .focus-drawer.is-open{transform:none}
+  .focus-drawer.is-open{transform:none;box-shadow:-4px 0 40px rgba(0,0,0,.18)}
   @media(max-width:640px){.focus-drawer{width:100%;min-width:0}}
 
   .focus-drawer__header{
@@ -1057,6 +1057,7 @@
 </div><!-- close wrap -->
 
 <!-- ============ VISIBILITY DRIVERS ============ -->
+</div><!-- close outer wrap -->
 <section id="drivers" style="background:#fff">
   <div class="wrap">
   <div class="sec-head reveal">
@@ -1188,7 +1189,6 @@
 </section>
 
 <!-- ============ RETAILER & CHANNEL RADAR ============ -->
-</div><!-- close wrap -->
 <section id="retailers" style="background:#fff">
   <div class="wrap">
   <div class="sec-head reveal">
